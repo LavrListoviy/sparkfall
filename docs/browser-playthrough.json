@@ -1,0 +1,447 @@
+{
+  "game": "sparkfall",
+  "version": "0.3.0",
+  "seed": "ISKRA-01",
+  "loadout": "coil",
+  "initialUnlocks": [],
+  "phase": "won",
+  "health": 68,
+  "floor": 8,
+  "artifacts": [
+    "coil",
+    "frost",
+    "thermal",
+    "green",
+    "needle"
+  ],
+  "stats": {
+    "combats": 6,
+    "swaps": 44,
+    "maxCascade": 6,
+    "earned": [
+      "spectrum",
+      "first_blood",
+      "chain_reaction",
+      "venom",
+      "elite",
+      "boss"
+    ]
+  },
+  "decisions": [
+    {
+      "type": "enter",
+      "id": "0-0"
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 3,
+        "b": 4
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 7,
+        "b": 14
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 23,
+        "b": 24
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 37,
+        "b": 44
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 36,
+        "b": 37
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 10,
+        "b": 17
+      }
+    },
+    {
+      "type": "reward",
+      "id": "frost"
+    },
+    {
+      "type": "enter",
+      "id": "1-0"
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 30,
+        "b": 37
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 10,
+        "b": 17
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 18,
+        "b": 25
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 23,
+        "b": 30
+      }
+    },
+    {
+      "type": "reward",
+      "id": "thermal"
+    },
+    {
+      "type": "enter",
+      "id": "2-1"
+    },
+    {
+      "type": "event",
+      "id": "learn"
+    },
+    {
+      "type": "enter",
+      "id": "3-1"
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "target",
+        "target": 1
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 8,
+        "b": 15
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 12,
+        "b": 13
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 9,
+        "b": 16
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 2,
+        "b": 3
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 1,
+        "b": 8
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 17,
+        "b": 18
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 11,
+        "b": 18
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 18,
+        "b": 25
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 23,
+        "b": 30
+      }
+    },
+    {
+      "type": "reward",
+      "id": "green"
+    },
+    {
+      "type": "enter",
+      "id": "4-0"
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 28,
+        "b": 29
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 24,
+        "b": 25
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 20,
+        "b": 27
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 23,
+        "b": 24
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 1,
+        "b": 2
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 1,
+        "b": 2
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 30,
+        "b": 37
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 28,
+        "b": 29
+      }
+    },
+    {
+      "type": "reward",
+      "id": "needle"
+    },
+    {
+      "type": "enter",
+      "id": "5-0"
+    },
+    {
+      "type": "event",
+      "id": "rest"
+    },
+    {
+      "type": "enter",
+      "id": "6-0"
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 17,
+        "b": 24
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 40,
+        "b": 47
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 32,
+        "b": 39
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 11,
+        "b": 12
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 30,
+        "b": 31
+      }
+    },
+    {
+      "type": "enter",
+      "id": "7-0"
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 32,
+        "b": 39
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 25,
+        "b": 26
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 25,
+        "b": 32
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 1,
+        "b": 2
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 12,
+        "b": 13
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 10,
+        "b": 11
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 25,
+        "b": 32
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 8,
+        "b": 15
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 25,
+        "b": 32
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 24,
+        "b": 25
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 17,
+        "b": 18
+      }
+    },
+    {
+      "type": "battle",
+      "action": {
+        "type": "swap",
+        "a": 30,
+        "b": 31
+      }
+    }
+  ]
+}

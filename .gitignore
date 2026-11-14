@@ -1,0 +1,8 @@
+node_modules/
+releases/
+.local/
+.tools/
+.env
+.env.*
+*.log
+public/_dev/
