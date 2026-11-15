@@ -2,8 +2,8 @@ import { TYPES } from './board.js';
 import { ARTIFACTS, LOADOUTS, GLYPH_RULES } from './content.js';
 
 /** Resolve the bounded generation profile without consuming randomness. */
-export function glyphWeights(loadout='coil',artifacts=[]) {
-  return combineGlyphBonuses([LOADOUTS[loadout]?.glyphBonus,...[...new Set(artifacts)].map(id=>ARTIFACTS[id]?.glyphBonus)]);
+export function glyphWeights(loadout='coil',artifacts=[],catalog=ARTIFACTS) {
+  return combineGlyphBonuses([LOADOUTS[loadout]?.glyphBonus,...[...new Set(artifacts)].map(id=>catalog[id]?.glyphBonus)]);
 }
 
 /** Combine independent additive sources into a generation profile. */

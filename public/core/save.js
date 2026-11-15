@@ -1,3 +1,5 @@
+import { LEGACY_ARTIFACTS } from './legacy-artifacts.js';
+import { catalogErrors } from './artifact-schema.js';
 import { createSession } from './run.js';
 import { RULES_VERSION } from './battle.js';
 import { ARTIFACTS, LOADOUTS, ACHIEVEMENTS, ENEMIES, EVENTS } from './content.js';
@@ -11,9 +13,7 @@ const list = (value,predicate,max=10000) => Array.isArray(value) && value.length
 const known = (table,key) => Object.hasOwn(table,key);
 const strings = value => typeof value === 'string' && value.length <= 200;
 const distance = (value,ruleset) => Number.isSafeInteger(value) && value<=6 && (ruleset===2 || value>=0);
-const artifactCount = Object.keys(ARTIFACTS).length;
 const achievementCount = Object.keys(ACHIEVEMENTS).length;
-const unlockCount = artifactCount+Object.keys(LOADOUTS).length;
 const unique = values => new Set(values).size === values.length;
 function check(condition) { if (!condition) throw new Error('Повреждённая структура сохранения'); }
 
@@ -21,21 +21,24 @@ function check(condition) { if (!condition) throw new Error('Повреждён�
 export function encodeSession(session) {
   return JSON.stringify(session,(key,value) => ['waves','presentation'].includes(key) ? [] : value);
 }
-function validateBattle(battle) {
+function validateBattle(battle,catalog) {
+  const artifactCount=Object.keys(catalog).length;
+  check(JSON.stringify(battle.artifactCatalog??LEGACY_ARTIFACTS)===JSON.stringify(catalog));
+  for(const flags of [battle.actionFlags,battle.ruleFlags??{}])check(flags&&typeof flags==='object'&&!Array.isArray(flags)&&Object.entries(flags).length<=4096&&Object.entries(flags).every(([k,v])=>k.length<120&&(typeof v==='boolean'||integer(v))));
   check(battle && battle.version === RULES_VERSION && strings(battle.seed) && [1,2].includes(battle.ruleset));
   check([0,1].includes(battle.glyphVersion) && known(LOADOUTS,battle.loadout));
   check(distance(battle.initialGap,battle.ruleset) && integer(battle.player?.stormShield,4));
-  check(integer(battle.rng,0xffffffff) && integer(battle.round) && integer(battle.actions,actionLimit(battle.artifacts,battle.ruleset)));
+  check(integer(battle.rng,0xffffffff) && integer(battle.round) && integer(battle.actions,actionLimit(battle.artifacts,battle.ruleset,catalog)));
   check(['player','victory','defeat'].includes(battle.phase));
   check(battle.player?.maxHp === 70 && integer(battle.player.hp,70));
   check(distance(battle.storm?.gap,battle.ruleset) && integer(battle.storm.target,48));
-  check(list(battle.artifacts,id=>known(ARTIFACTS,id),artifactCount));
+  check(list(battle.artifacts,id=>known(catalog,id),artifactCount));
   check(list(battle.enemies,e=>e && known(ENEMIES,e.id) && integer(e.hp,1000) && integer(e.maxHp,1000) && e.hp <= e.maxHp && integer(e.poison) && integer(e.chill,2) && integer(e.intent) && [1,2].includes(e.stage) && [1,.7,.5,.8].includes(e.attackScale) && e.resists && Object.entries(e.resists).every(([k,v])=>TYPES.includes(k) && [.5,1,1.5].includes(v)),3) && battle.enemies.length > 0);
   check(Number.isInteger(battle.target) && battle.target >= -1 && battle.target < battle.enemies.length);
   check(battle.phase !== 'player' || (battle.player.hp > 0 && battle.enemies.some(e=>e.hp > 0)));
   const board = battle.board;
   if (battle.glyphVersion===1) {
-    const expected=glyphWeights(battle.loadout,battle.artifacts);
+    const expected=glyphWeights(battle.loadout,battle.artifacts,catalog);
     check(board?.glyphWeights && Object.keys(board.glyphWeights).length===TYPES.length && TYPES.every(type=>board.glyphWeights[type]===expected[type]));
   } else check(board?.glyphWeights===undefined);
   check(board?.width === 7 && board.height === 7);
@@ -51,25 +54,33 @@ export function parseSave(raw) {
   try {
     check(typeof raw === 'string' && raw.length < 2_000_000);
     const session = JSON.parse(raw);
-    if (session?.schema === 1 && ['0.3.0','0.4.0','0.5.0'].includes(session.version)) {
+    if(session?.version===RULES_VERSION&&session.run)check(session.run.artifactCatalog&&(!session.run.battle||session.run.battle.artifactCatalog));
+    if (session?.schema === 1 && ['0.3.0','0.4.0','0.5.0','0.6.0'].includes(session.version)) {
       const previous=session.version;session.version=RULES_VERSION;
       if(session.run){
-        session.run.glyphVersion=0;
-        if(previous!=='0.5.0'){
+        if(previous!=='0.6.0')session.run.glyphVersion=0;
+        if(['0.3.0','0.4.0'].includes(previous)){
           session.run.routeVersion=previous==='0.3.0'?1:(session.run.routeVersion??2);
           session.run.rewardRarity='normal';session.run.rewardExhausted=null;
         }
         if(session.run.battle){
           const battle=session.run.battle;
-          battle.version=RULES_VERSION;battle.glyphVersion=0;battle.loadout=session.run.loadout;
-          if(previous!=='0.5.0'){battle.ruleset=1;battle.player.stormShield=0;}
+          battle.version=RULES_VERSION;if(previous!=='0.6.0')battle.glyphVersion=0;battle.loadout=session.run.loadout;
+          if(['0.3.0','0.4.0'].includes(previous)){battle.ruleset=1;battle.player.stormShield=0;}
         }
       }
     }
     if (session?.schema !== 1 || session.version !== RULES_VERSION) throw new Error('Сохранение другой версии. Можно выгрузить его и начать новый профиль.');
+    if(session.run){
+      session.run.artifactCatalog??=structuredClone(LEGACY_ARTIFACTS);
+      if(session.run.battle){session.run.battle.artifactCatalog??=structuredClone(session.run.artifactCatalog);session.run.battle.ruleFlags??={};}
+    }
+    const catalog=session.run?.artifactCatalog??LEGACY_ARTIFACTS;
+    check(catalogErrors({schema:1,items:catalog}).length===0);
+    const artifactCount=Object.keys(catalog).length,unlockCount=256+Object.keys(LOADOUTS).length;
     const profile = session.profile;
     check(profile && integer(profile.currency));
-    check(list(profile.unlocked,key=>strings(key) && /^(artifact|loadout):/.test(key) && known(key.startsWith('artifact:') ? ARTIFACTS : LOADOUTS,key.split(':')[1]),unlockCount) && unique(profile.unlocked));
+    check(list(profile.unlocked,key=>strings(key) && /^(artifact|loadout):/.test(key) && known(key.startsWith('artifact:') ? {...ARTIFACTS,...catalog} : LOADOUTS,key.split(':')[1]),unlockCount) && unique(profile.unlocked));
     check(list(profile.achievements,id=>known(ACHIEVEMENTS,id),achievementCount) && unique(profile.achievements));
     check(profile.stats && ['runs','wins','bestDepth'].every(key=>integer(profile.stats[key])));
     const run = session.run;
@@ -81,10 +92,10 @@ export function parseSave(raw) {
       check(integer(run.floor,8) && integer(run.hp,70) && distance(run.gap,run.routeVersion>=3?2:1) && integer(run.pendingEmbers));
       check(typeof run.settled === 'boolean' && run.settled === ['won','lost'].includes(run.phase));
       check(run.phase !== 'map' || run.floor < 8);
-      check(list(run.initialUnlocks,strings,unlockCount) && list(run.artifacts,id=>known(ARTIFACTS,id),artifactCount) && unique(run.artifacts));
-      check(list(run.reward,id=>known(ARTIFACTS,id),3) && unique(run.reward));
+      check(list(run.initialUnlocks,strings,unlockCount) && list(run.artifacts,id=>known(catalog,id),artifactCount) && unique(run.artifacts));
+      check(list(run.reward,id=>known(catalog,id),3) && unique(run.reward));
       check(['normal','rare'].includes(run.rewardRarity) && [null,'normal','rare'].includes(run.rewardExhausted));
-      check(run.phase !== 'reward' || (run.reward.length > 0 && (run.rewardRarity!=='rare'||run.reward.every(id=>ARTIFACTS[id].rarity==='rare'))));
+      check(run.phase !== 'reward' || (run.reward.length > 0 && (run.rewardRarity!=='rare'||run.reward.every(id=>catalog[id].rarity==='rare'))));
       check(run.event === null || known(EVENTS,run.event));
       check(!['event','rest'].includes(run.phase) || known(EVENTS,run.event));
       check(list(run.route,layer=>list(layer,n=>n && strings(n.id) && ['battle','elite','boss','event','rest'].includes(n.kind) && (n.enemyIds ? list(n.enemyIds,id=>known(ENEMIES,id),3) && n.enemyIds.length > 0 : known(EVENTS,n.event)),run.routeVersion>=3?3:2) && layer.length > 0,8) && run.route.length === 8);
@@ -101,7 +112,7 @@ export function parseSave(raw) {
       if(['battle','event','rest'].includes(run.phase)) check(run.route[run.floor]?.some(n=>n.id===run.currentNode));
       check(run.stats && integer(run.stats.combats,8) && integer(run.stats.swaps) && integer(run.stats.maxCascade,64) && list(run.stats.earned,id=>known(ACHIEVEMENTS,id),achievementCount));
       if (run.battle) {
-        validateBattle(run.battle);
+        validateBattle(run.battle,catalog);
         check(run.battle.glyphVersion===run.glyphVersion && run.battle.loadout===run.loadout);
       }
       check(run.phase !== 'battle' || run.battle?.phase === 'player');

@@ -1,11 +1,12 @@
 {
   "name": "sparkfall",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "description": "Turn-based match-three roguelite combat prototype",
   "scripts": {
     "dev": "node scripts/serve.mjs",
+    "editor": "node scripts/editor-server.mjs",
     "test": "node --test",
     "glossary": "node scripts/glossary.mjs",
     "simulate": "node scripts/simulate.mjs",

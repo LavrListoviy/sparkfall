@@ -1,4 +1,5 @@
 export const menuMessages={
+  'menu.blueprintsEmpty':{ru:'Доступных чертежей пока нет.',en:'No blueprints are available yet.'},
   'menu.main':{ru:'Главное меню',en:'Main menu'},
   'menu.new':{ru:'Новая экспедиция',en:'New expedition'},
   'menu.lastResult':{ru:'Итоги экспедиции',en:'Expedition results'},

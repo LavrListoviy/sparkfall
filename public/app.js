@@ -1,3 +1,4 @@
+import { hasArtifact } from './core/artifact-rules.js';
 import { eventText, battleAnnouncement } from './presentation/text.js';
 import { t, setLanguage, getLanguage, number, tileName } from './i18n/index.js';
 import { BattleScene } from './presentation/scene.js';
@@ -10,7 +11,7 @@ import { legalMoves } from './core/board.js';
 import { swipeTarget, chooseCell } from './core/input.js';
 import { createSession, startRun, enterNode, battleAction, chooseReward, chooseEvent, abandonRun, buyUnlock, isActive } from './core/run.js';
 import { loadSession, saveSession } from './core/save.js';
-import { ARTIFACTS, ENEMIES, LOADOUTS, ACHIEVEMENTS, intentName } from './i18n/content.js';
+import { ARTIFACTS, artifactTable, ENEMIES, LOADOUTS, ACHIEVEMENTS, intentName } from './i18n/content.js';
 import { localizeDocument } from './i18n/document.js';
 import { errorText } from './i18n/errors.js';
 import { homeView, loadoutView, workshopView, mapView, rewardView, eventView, resultView, relicInventory, glossaryView, pager, escape, glyphFrequencyView } from './views.js';
@@ -100,7 +101,7 @@ function renderBoard(board=state.board,matching=[]) {
   boardElement.innerHTML=board.tiles.map((type,index)=>{
     const crater=board.craters[index], blocked=board.blocked[index], locked=board.locks[index], unstable=board.unstable[index];
     const marked=state.storm.target===index && !blocked;
-    const blockedHeal=type==='heal' && Boolean(healingBlock(state.storm.gap,state.artifacts,state.ruleset));
+    const blockedHeal=type==='heal' && Boolean(healingBlock(state.storm.gap,state.artifacts,state.ruleset,state.artifactCatalog));
     const label=t('cell.label',{row:Math.floor(index/7)+1,column:index%7+1,tile:blocked?t('cell.destroyed'):crater?t('cell.crater',{crater:crater}):tileName(type),chains:locked?t('cell.chained'):'',instability:unstable?t('cell.unstable'):'',meteor:marked?t('cell.meteor'):'',healing:blockedHeal?t('cell.healBlocked'):''});
     return `<button class="tile ${blocked?'void':crater?'crater':type}${hits.has(index)?' matching':''}${selected===index?' selected':''}${locked?' chained':''}${unstable?' unstable':''}${blockedHeal?' blocked-heal':''}" data-index="${index}" aria-label="${label}" aria-pressed="${selected===index}" ${blocked||crater||locked||busy||state.phase!=='player'?'disabled':''}>${blocked?'<span>×</span>':icon(crater?'crater':type)}${crater?`<span class="crater-age">${crater}</span>`:''}${locked?'<span class="hazard-label">⛓</span>':''}${unstable?'<span class="hazard-label">!</span>':''}${marked?'<span class="meteor-mark"></span>':''}</button>`;
   }).join('');
@@ -122,8 +123,8 @@ function renderHUD() {
   $('#hero-hp').textContent=`${state.player.hp} / ${state.player.maxHp}`;
   $('#hero-health').style.width=`${state.player.hp/state.player.maxHp*100}%`;
   $('#hero-hud').classList.toggle('critical',state.player.hp<=20);
-  const storm=inStorm(state.storm.gap),block=healingBlock(state.storm.gap,state.artifacts,state.ruleset);
-  $('#healing-status').textContent=block==='heart'?t('healing.insideOnly'):block?(state.artifacts.includes('stormweave')?t('healing.longOnly'):t('healing.blocked')):t('healing.allowed');
+  const storm=inStorm(state.storm.gap),block=healingBlock(state.storm.gap,state.artifacts,state.ruleset,state.artifactCatalog);
+  $('#healing-status').textContent=block==='heart'?t('healing.insideOnly'):block?(hasArtifact(state.artifacts,'stormweave',state.artifactCatalog)?t('healing.longOnly'):t('healing.blocked')):t('healing.allowed');
   $('#healing-status').classList.toggle('blocked',Boolean(block));
   $('#hero-shield').textContent=state.player.stormShield?t('combat.shield',{stormShield:state.player.stormShield}):'';
   $('#storm-count').textContent=storm?t('combat.depth',{depth:stormDepth(state.storm.gap)}):state.storm.gap;
@@ -131,7 +132,7 @@ function renderHUD() {
   document.body.classList.toggle('storm-active',storm);
   $('#storm-help').classList.toggle('caught',storm);
   $('#enemy-huds').innerHTML=state.enemies.map((enemy,i)=>{
-    const data=ENEMIES[enemy.id],intent=currentIntent(enemy),amount=Math.floor(intentDamage(enemy)*(state.artifacts.includes('glass')?1.2:1));
+    const data=ENEMIES[enemy.id],intent=currentIntent(enemy),amount=Math.floor(intentDamage(enemy)*(hasArtifact(state.artifacts,'glass',state.artifactCatalog)?1.2:1));
     return `<div class="actor-hud enemy-hud ${i===state.target?'chosen':''} ${enemy.hp<=0?'dead':''}"><button class="enemy-name" data-target="${i}" ${busy||enemy.hp<=0?'disabled':''} aria-pressed="${i===state.target}">${data.name}${enemy.id==='heart'?` <small>${t('enemy.phase',{stage:enemy.stage})}</small>`:''}</button><div class="health-bar enemy-health"><span style="width:${enemy.hp/enemy.maxHp*100}%"></span></div><div class="enemy-vitals"><b>${enemy.hp}/${enemy.maxHp}</b><span class="ice">${enemy.chill?`❄${enemy.chill}`:''}</span><span class="poison">${enemy.poison?`☠${enemy.poison}`:''}</span></div><div class="hud-intent" title="${intentName(enemy)}">${enemy.hp<=0?t('enemy.defeated'):intent.kind==='attack'?`${icon('steel')} ${amount}`:intent.kind==='locks'?`⛓ ${intent.amount}`:intent.kind==='unstable'?`! ${intent.amount}`:t('enemy.charging')}</div><div class="hud-resists">${Object.entries(enemy.resists).map(([type,mult])=>`<button data-resist="${type}:${mult}" class="${type}" aria-label="${data.name}: ${tileName(type)} ×${number(mult)}">${icon(type)}<span>×${number(mult)}</span></button>`).join('')}</div></div><button class="actor-target" data-target="${i}" ${busy||enemy.hp<=0?'disabled':''} aria-label="${t('enemy.select',{enemy:data.name,health:enemy.hp,intent:intentName(enemy),attackDamage:intent.kind==='attack'?` ${amount}`:''})}"></button>`;
   }).join('');
   $('#round-label').textContent=t('combat.roundLabel',{round:state.round});
@@ -170,7 +171,7 @@ async function runAction(action) {
   try{
     for(const frame of buildTimeline(before,result)){
       if(frame.kind==='match'){banner(frame.wave?t('combat.wave',{wave:frame.wave+1}):t('combat.firstWave'));tone(430+frame.wave*90,.12,'triangle');}
-      if(frame.event){const text=eventText(frame.event);if(text)message(text);if(frame.event.type==='enemyPhase')banner(t('combat.enemyPhase'));if(frame.event.type==='meteor')banner(t('combat.stormStrike'));if(frame.event.type==='bossPhase')banner(t('combat.bossPhase'));}
+      if(frame.event){const text=eventText(frame.event,session.run?.artifactCatalog);if(text)message(text);if(frame.event.type==='enemyPhase')banner(t('combat.enemyPhase'));if(frame.event.type==='meteor')banner(t('combat.stormStrike'));if(frame.event.type==='bossPhase')banner(t('combat.bossPhase'));}
       await scene.play(frame,settings,()=>{
         if(frame.snapshot){state={...state,...structuredClone(frame.snapshot)};scene.state=state;if(frame.snapshot.board)scene.setBoard(frame.snapshot.board);renderHUD();}
         if(frame.event?.amount)tone(frame.event.type==='attack'?150:frame.event.type==='heal'?720:480,.08);
@@ -268,10 +269,10 @@ function showGlossary(){
 }
 function showInventory(page=0){
   const slice=paginate(session.run?.artifacts??[],page,4);modalPage=slice.page;
-  showModal(`<p class="modal-kicker">${t('inventory.kicker')}</p><h2>${t('inventory.title')}</h2>${relicInventory(slice.items)}${pager('inventory',slice)}<button class="text-button glyph-open" data-action="glyphs">${t('glyph.title')} →</button>`,'inventory');
+  showModal(`<p class="modal-kicker">${t('inventory.kicker')}</p><h2>${t('inventory.title')}</h2>${relicInventory(slice.items,session.run?.artifactCatalog)}${pager('inventory',slice)}<button class="text-button glyph-open" data-action="glyphs">${t('glyph.title')} →</button>`,'inventory');
 }
 function showJournal(page=0){
-  const entries=logEntries.slice(-30).reverse().map(eventText).filter(Boolean),slice=paginate(entries,page,5);modalPage=slice.page;
+  const entries=logEntries.slice(-30).reverse().map(event=>eventText(event,session.run?.artifactCatalog)).filter(Boolean),slice=paginate(entries,page,5);modalPage=slice.page;
   showModal(`<p class="modal-kicker">${t('journal.kicker')}</p><h2>${t('journal.title')}</h2><ol class="journal-list">${slice.items.map(text=>`<li>${escape(text)}</li>`).join('')||`<li>${t('menu.logEmpty')}</li>`}</ol>${pager('journal',slice)}`,'journal');
 }
 $('#storm-help').onclick=()=>showHelp(3);
@@ -302,7 +303,7 @@ document.addEventListener('click',e=>{
   if(button.dataset.action==='glyphs'){showModal(glyphFrequencyView(session.run),'glyphs');return;}
   if(button.dataset.action==='inventory'){showInventory();return;}
   if(button.dataset.action==='inventory-back'){showInventory(modalPage);return;}
-  if(button.dataset.relic){const a=ARTIFACTS[button.dataset.relic],back=currentModal==='inventory'?`<button class="text-button dialog-back" data-action="inventory-back">← ${t('inventory.title')}</button>`:'';showModal(`${back}<span class="rune-large ${a.color}">${icon(a.icon)}</span><h2>${a.name}</h2><p>${a.text}</p>`);return;}
+  if(button.dataset.relic){const a=artifactTable(session.run?.artifactCatalog)[button.dataset.relic],back=currentModal==='inventory'?`<button class="text-button dialog-back" data-action="inventory-back">← ${t('inventory.title')}</button>`:'';showModal(`${back}<span class="rune-large ${a.color}">${icon(a.icon)}</span><h2>${escape(a.name)}</h2><p>${escape(a.text)}</p>`);return;}
   if(button.dataset.info){const type=button.dataset.info;if(['steel','fire','ice','poison','heal'].includes(type))showModal(`<span class="rune-large ${type}">${icon(type)}</span><h2>${tileName(type)}</h2><p>${t(`tile.${type}.description`)}</p><p class="modal-warning">${t('tile.bonuses')}</p><button class="secondary-button" data-action="glyphs">${t('glyph.title')}</button>`);return;}
   if(button.dataset.resist){const [type,mult]=button.dataset.resist.split(':');showModal(`<h2>${Number(mult)<1?t('combat.resistance'):t('combat.weakness')}: ${tileName(type)}</h2><p>${t('combat.resistanceDescription',{mult:Number(mult)})}</p>`);return;}
   if(busy)return;

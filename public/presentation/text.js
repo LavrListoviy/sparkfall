@@ -1,5 +1,5 @@
 import { t, tileName } from '../i18n/index.js';
-import { ARTIFACTS } from '../i18n/content.js';
+import { artifactTable } from '../i18n/content.js';
 import { weatherLabel } from '../views.js';
 
 /** Rebuild live announcements from facts when the language changes, without touching the battle. */
@@ -8,7 +8,7 @@ export function battleAnnouncement(battle){
 }
 
 /** Events keep their numeric facts; historical entries can be translated again without replaying combat. */
-export function eventText(e) {
+export function eventText(e,catalog) {
   let text;
   switch(e.type){
     case 'damage':text=e.element==='steel'?t('log.damage.physical',e):t('log.damage',{damageType:tileName(e.element),amount:e.amount});break;
@@ -21,5 +21,5 @@ export function eventText(e) {
     case 'chill':case 'poison':case 'attack':case 'ward':case 'locks':case 'charge':case 'bossPhase':case 'artifact':case 'enemyPhase':text=t(`log.${e.type}`,e);break;
     default:return '';
   }
-  return (e.artifact?`${ARTIFACTS[e.artifact].name}: `:'')+text;
+  return (e.artifact?`${artifactTable(catalog)[e.artifact]?.name??e.artifact}: `:'')+text;
 }

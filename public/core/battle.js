@@ -3,18 +3,23 @@ import { createBoard, swapBoard, ageCraters, strikeBoard, applyHazard, disableCo
 import { actionLimit, healingBlock, inStorm, meteorDamage, stormTier } from './storm.js';
 import { ENEMIES } from './content.js';
 import { glyphWeights } from './glyphs.js';
+import { LEGACY_ARTIFACTS } from './legacy-artifacts.js';
+import { hasArtifact, artifactSource, applyArtifactRules } from './artifact-rules.js';
 
-export const RULES_VERSION = '0.6.0';
+export const RULES_VERSION = '0.7.0';
 const clone = state => structuredClone(state);
 /** Capture the exact state at an effect boundary without involving presentation timing. */
-function emit(state,event) {
+function emit(state,event,composed=false) {
+  const boardEffect=event.artifact==='glove';
+  if(event.artifact && !composed)event={...event,artifact:artifactSource(state,event.artifact)};
   state.events.push(event);
   if (!state.presentation) return;
   const snapshot = {player:{...state.player},enemies:clone(state.enemies),target:state.target,storm:{...state.storm}};
-  if (['locks','unstable','meteor','bossPhase'].includes(event.type) || event.artifact === 'glove') snapshot.board = clone(state.board);
+  if (['locks','unstable','meteor','bossPhase'].includes(event.type) || boardEffect) snapshot.board = clone(state.board);
   state.presentation.push({kind:'effect',event:{...event},snapshot});
 }
-const has = (state,id) => state.artifacts?.includes(id);
+const has = (state,id) => hasArtifact(state.artifacts,id,state.artifactCatalog);
+const emitComposed=(state,event)=>emit(state,event,true);
 const definition = enemy => ENEMIES[enemy.id] ?? ENEMIES.furnace;
 const targetOf = state => {
   if (!state.enemies[state.target] || state.enemies[state.target].hp <= 0) state.target = state.enemies.findIndex(e => e.hp > 0);
@@ -22,16 +27,16 @@ const targetOf = state => {
 };
 
 /** All randomness is seeded; paired encounters scale each enemy independently. */
-export function createBattle(seed = 'ISKRA-01', {stormGap = 4, enemyIds = ['furnace'], paired = false, artifacts = [], hp = 70, room = 1, ruleset = 1, encounterScale = 1, glyphVersion = 0, loadout = 'coil'} = {}) {
+export function createBattle(seed = 'ISKRA-01', {stormGap = 4, enemyIds = ['furnace'], paired = false, artifacts = [], hp = 70, room = 1, ruleset = 1, encounterScale = 1, glyphVersion = 0, loadout = 'coil', artifactCatalog = LEGACY_ARTIFACTS} = {}) {
   if (!enemyIds.length || enemyIds.length > 3) throw new RangeError('An encounter requires 1 to 3 enemies');
   const random = new Random(seed);
-  const board = createBoard(random,7,7,glyphVersion===1?glyphWeights(loadout,artifacts):undefined);
+  const board = createBoard(random,7,7,glyphVersion===1?glyphWeights(loadout,artifacts,artifactCatalog):undefined);
   const enemies = enemyIds.map(id => {
     const data = ENEMIES[id];
     const maxHp = Math.floor(data.hp * encounterScale * (enemyIds.length === 3 ? .48 : paired ? .65 : 1));
     return {id,hp:maxHp,maxHp,chill:0,poison:0,intent:0,stage:1,attackScale:encounterScale * (enemyIds.length === 3 ? .5 : paired ? .7 : 1),resists:{...data.resists}};
   });
-  return {version:RULES_VERSION,ruleset,glyphVersion,loadout,seed,initialGap:stormGap,room,round:1,actions:actionLimit(artifacts,ruleset),phase:'player',player:{hp,maxHp:70,stormShield:0},enemies,target:0,artifacts:[...artifacts],board,storm:{gap:stormGap,target:random.int(board.tiles.length)},rng:random.state,events:[],history:[],waves:[],presentation:[],actionFlags:{}};
+  return {version:RULES_VERSION,artifactCatalog:clone(artifactCatalog),ruleFlags:{},ruleset,glyphVersion,loadout,seed,initialGap:stormGap,room,round:1,actions:actionLimit(artifacts,ruleset,artifactCatalog),phase:'player',player:{hp,maxHp:70,stormShield:0},enemies,target:0,artifacts:[...artifacts],board,storm:{gap:stormGap,target:random.int(board.tiles.length)},rng:random.state,events:[],history:[],waves:[],presentation:[],actionFlags:{}};
 }
 /** Use the same intent for the forecast and the enemy resolver. */
 export function currentIntent(enemy) {
@@ -100,12 +105,14 @@ export function applyGroups(state,groups) {
       group.indices.forEach(i => { next.board.unstable[i] = false; });
       if (next.player.hp <= 0) break;
     }
+    const ruleContext={group,...ruleTarget(next)};
+    const afterGroup=()=>applyArtifactRules(next,'group',ruleContext,emitComposed,healingReason);
     const count = group.indices.length;
     const bonus = count >= 5 ? 1.5 : count === 4 ? 1.25 : 1;
     const elemental = ['fire','ice','poison'].includes(group.type);
     const glass = has(next,'glass') && elemental && count >= 4 ? 1.25 : 1;
     if (group.type === 'heal') {
-      const blocked=healingBlock(next.storm.gap,next.artifacts,next.ruleset??1);
+      const blocked=healingBlock(next.storm.gap,next.artifacts,next.ruleset??1,next.artifactCatalog);
       if (blocked) emit(next,{type:'healBlocked',reason:blocked});
       else {
         const healing = Math.floor(count * 2 * bonus);
@@ -118,12 +125,12 @@ export function applyGroups(state,groups) {
         }
       }
       if (has(next,'green') && !flags.green) { flags.green = true; addPoison(next,2,'green'); }
-      longGroupEffects(next,group);
+      longGroupEffects(next,group);afterGroup();
       continue;
     }
     const enemy = targetOf(next);
-    if (!enemy) { longGroupEffects(next,group); continue; }
-    if (group.type === 'poison') { addPoison(next,Math.floor(count * 2 * bonus * glass)); longGroupEffects(next,group); continue; }
+    if (!enemy) { longGroupEffects(next,group); afterGroup(); continue; }
+    if (group.type === 'poison') { addPoison(next,Math.floor(count * 2 * bonus * glass)); longGroupEffects(next,group); afterGroup(); continue; }
     let base = count * {steel:3,fire:4,ice:2}[group.type] * bonus * glass;
     if (group.type === 'fire' && has(next,'thermal') && !flags.thermal && enemy.chill) {
       flags.thermal = true; enemy.chill = 0; base *= 1.5;
@@ -141,7 +148,7 @@ export function applyGroups(state,groups) {
       if (extra) { flags.frost = true; emit(next,{type:'artifact',artifact:'frost'}); }
     }
     if (group.type === 'steel' && count >= 4 && has(next,'needle') && enemy.hp > 0) addPoison(next,2,'needle');
-    longGroupEffects(next,group);
+    longGroupEffects(next,group);afterGroup();
   }
   return next;
 }
@@ -200,7 +207,9 @@ function enemyPhase(state,random) {
     state.storm.target = forecastTarget(state,random);
   } else emit(state,{type:'storm',gap:state.storm.gap});
   if (outcome(state)) return;
-  state.round++; state.actions = actionLimit(state.artifacts,state.ruleset??1);
+  applyArtifactRules(state,'roundEnd',ruleTarget(state),emitComposed,healingReason);
+  if(outcome(state))return;
+  state.round++; state.actions = actionLimit(state.artifacts,state.ruleset??1,state.artifactCatalog);
 }
 function gloveCleanup(state,waves,random) {
   if (!has(state,'glove')) return;
@@ -230,6 +239,7 @@ export function playSwap(state,a,b) {
     next.board = wave.before;
     next.presentation.push({kind:'match',wave:index,indices:wave.groups.flatMap(g=>g.indices),board:clone(wave.before)});
     if (index === 1 && has(next,'coil')) { targetOf(next); damage(next,next.target,3,'steel','coil'); }
+    if(index>0)applyArtifactRules(next,'cascade',ruleTarget(next),emitComposed,healingReason);
     next = applyGroups(next,wave.groups);
     next.waves.push(wave);
     next.presentation.push({kind:'fall',board:clone(wave.after)});
@@ -255,7 +265,7 @@ export function endRound(state) {
 /** Standalone encounter helper retained for deterministic combat regression tests. */
 export function nextRoom(state) {
   if (state.phase !== 'victory') return state;
-  const next = createBattle(state.rng,{stormGap:Math.min(6,state.storm.gap+3),hp:state.player.hp,room:state.room+1,artifacts:state.artifacts,glyphVersion:state.glyphVersion,loadout:state.loadout});
+  const next = createBattle(state.rng,{stormGap:Math.min(6,state.storm.gap+3),hp:state.player.hp,room:state.room+1,artifacts:state.artifacts,glyphVersion:state.glyphVersion,loadout:state.loadout,artifactCatalog:state.artifactCatalog});
   next.history = [...state.history,{type:'nextRoom'}];
   return next;
 }
@@ -265,4 +275,11 @@ export function selectTarget(state,target) {
   const next = clone(state); next.target = target;
   next.history.push({type:'target',target}); next.events = []; next.waves = []; next.presentation = [];
   return next;
+}
+
+function healingReason(state){return healingBlock(state.storm.gap,state.artifacts,state.ruleset??1,state.artifactCatalog);}
+/** Reading a hook context must not retarget legacy encounters with no composed rules. */
+function ruleTarget(state){
+  const target=state.enemies[state.target]?.hp>0?state.target:state.enemies.findIndex(enemy=>enemy.hp>0);
+  return {target,chill:state.enemies[target]?.chill??0,poison:state.enemies[target]?.poison??0};
 }

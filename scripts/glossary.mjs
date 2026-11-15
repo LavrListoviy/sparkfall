@@ -38,7 +38,7 @@ export function glossaryMarkdown(){
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   const path=new URL('../docs/GLOSSARY.md',import.meta.url),expected=glossaryMarkdown();
   if(process.argv.includes('--check')){
-    if(await readFile(path,'utf8')!==expected)throw new Error('Glossary is out of date. Run npm run glossary.');
+    if((await readFile(path,'utf8')).replaceAll('\r\n','\n')!==expected)throw new Error('Glossary is out of date. Run npm run glossary.');
     console.log('Glossary is synchronized.');
   }else{await writeFile(path,expected);console.log('Updated docs/GLOSSARY.md.');}
 }

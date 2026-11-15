@@ -2,7 +2,7 @@ import { t, getLanguage, number, tileName } from './i18n/index.js';
 import { glyphWeights } from './core/glyphs.js';
 import { TYPES } from './core/board.js';
 import { RULES_VERSION } from './core/battle.js';
-import { ARTIFACTS, ENEMIES, LOADOUTS, ACHIEVEMENTS, EVENTS } from './i18n/content.js';
+import { ARTIFACTS, artifactTable, ENEMIES, LOADOUTS, ACHIEVEMENTS, EVENTS } from './i18n/content.js';
 import { isActive, choiceBlocked } from './core/run.js';
 import { inStorm, stormDepth, travelForecast } from './core/storm.js';
 import { errorText } from './i18n/errors.js';
@@ -12,17 +12,18 @@ import { icon } from './icons.js';
 
 export const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const portrait=(index,label)=>`<span class="pixel-portrait" role="img" aria-label="${label}" style="--sprite-x:${index%2*100}%;--sprite-y:${Math.floor(index/2)*100/3}%"></span>`;
-const rune=id=>`<span class="relic-rune ${ARTIFACTS[id].color}">${icon(ARTIFACTS[id].icon)}</span>`;
+const rune=(id,ARTIFACTS=artifactTable())=>`<span class="relic-rune ${ARTIFACTS[id].color}">${icon(ARTIFACTS[id].icon)}</span>`;
 const owned=(profile,kind,id,item)=>item.cost===0||profile.unlocked.includes(`${kind}:${id}`);
 export const weatherLabel=gap=>inStorm(gap)?t('weather.depth',{depth:stormDepth(gap)}):t('weather.lead',{gap});
 
 /** Show nominal generation probabilities and their sources, never a quota for the visible board. */
 export function glyphFrequencyView(run){
+  const ARTIFACTS=artifactTable(run?.artifactCatalog);
   const weighted=run?.glyphVersion===1,loadout=weighted?run.loadout:'coil',artifacts=weighted?run.artifacts:[];
-  const weights=glyphWeights(loadout,artifacts),total=Object.values(weights).reduce((a,b)=>a+b,0);
+  const weights=glyphWeights(loadout,artifacts,run?.artifactCatalog),total=Object.values(weights).reduce((a,b)=>a+b,0);
   return `<p class="modal-kicker">${t('glyph.kicker')}</p><h2>${t('glyph.title')}</h2><p class="glyph-explanation">${t(weighted?'glyph.explanation':'glyph.legacy')}</p><dl class="glyph-frequencies">${TYPES.map(type=>{
     const sources=[...(LOADOUTS[loadout]?.glyphBonus?.[type]?[LOADOUTS[loadout].name]:[]),...artifacts.filter(id=>ARTIFACTS[id]?.glyphBonus?.[type]).map(id=>ARTIFACTS[id].name)];
-    return `<div><dt><span class="${type}">${icon(type)}</span><span>${tileName(type)}<small>${sources.join(' · ')||t('glyph.base')}</small></span></dt><dd>${number(Math.round(weights[type]/total*1000)/10)}%</dd></div>`;
+    return `<div><dt><span class="${type}">${icon(type)}</span><span>${tileName(type)}<small>${escape(sources.join(' · ')||t('glyph.base'))}</small></span></dt><dd>${number(Math.round(weights[type]/total*1000)/10)}%</dd></div>`;
   }).join('')}</dl><p class="glyph-note">${t('glyph.constraint')}</p>`;
 }
 const back=()=>`<button class="text-button screen-back" data-action="home">← ${t('menu.backMain')}</button>`;
@@ -45,7 +46,7 @@ export function homeView(session){
 export function loadoutView(session,selected='coil'){
   const id=LOADOUTS[selected]?selected:'coil',item=LOADOUTS[id],artifact=ARTIFACTS[item.artifact];
   const unlocked=owned(session.profile,'loadout',id,item),active=isActive(session);
-  return `<section class="game-screen">${heading(t('menu.chooseLoadout'),'',bank(session.profile))}<div class="catalog loadout-catalog"><nav class="catalog-list" aria-label="${t('menu.prepare')}">${Object.entries(LOADOUTS).map(([key,value])=>selection('loadout',key,value.name,value.subtitle,key===id)).join('')}</nav><article class="detail-card loadout-detail"><div class="detail-hero" aria-hidden="true">${portrait(0,'')}</div><div class="detail-copy"><p class="eyebrow">${item.subtitle}</p><h2>${item.name}</h2><p class="detail-facts">${t('home.loadoutDescription')}</p><div class="artifact-description">${rune(item.artifact)}<div><small>${t('menu.startingArtifact')}</small><h3>${artifact.name}</h3></div></div><p>${artifact.text}</p><div class="glyph-affinity"><p>${t(`glyph.affinity.${id}`)}</p><button class="text-button" data-glyph-loadout="${id}">${t('glyph.title')} →</button></div><div class="detail-action">${unlocked?`<button class="primary-button" data-action="start" ${active?'disabled':''}>${t('menu.start')} ${icon('arrow')}</button>`:purchaseControl(session,'loadout',id,item)}</div></div></article></div></section>`;
+  return `<section class="game-screen">${heading(t('menu.chooseLoadout'),'',bank(session.profile))}<div class="catalog loadout-catalog"><nav class="catalog-list" aria-label="${t('menu.prepare')}">${Object.entries(LOADOUTS).map(([key,value])=>selection('loadout',key,value.name,value.subtitle,key===id)).join('')}</nav><article class="detail-card loadout-detail"><div class="detail-hero" aria-hidden="true">${portrait(0,'')}</div><div class="detail-copy"><p class="eyebrow">${item.subtitle}</p><h2>${escape(item.name)}</h2><p class="detail-facts">${t('home.loadoutDescription')}</p><div class="artifact-description">${rune(item.artifact)}<div><small>${t('menu.startingArtifact')}</small><h3>${escape(artifact.name)}</h3></div></div><p>${escape(artifact.text)}</p><div class="glyph-affinity"><p>${t(`glyph.affinity.${id}`)}</p><button class="text-button" data-glyph-loadout="${id}">${t('glyph.title')} →</button></div><div class="detail-action">${unlocked?`<button class="primary-button" data-action="start" ${active?'disabled':''}>${t('menu.start')} ${icon('arrow')}</button>`:purchaseControl(session,'loadout',id,item)}</div></div></article></div></section>`;
 }
 function purchaseControl(session,kind,id,item){
   if(owned(session.profile,kind,id,item))return `<p class="owned-label">✓ ${t('workshop.owned')}</p>`;
@@ -56,12 +57,13 @@ function purchaseControl(session,kind,id,item){
 /** Purchases re-render this view against the same navigation selection and page. */
 export function workshopView(session,navigation=createNavigation()){
   const blueprints=navigation.workshopTab!=='achievements',table=blueprints?ARTIFACTS:ACHIEVEMENTS;
-  const entries=Object.keys(table).filter(id=>!blueprints||ARTIFACTS[id].cost);
+  const entries=Object.keys(table).filter(id=>!blueprints||ARTIFACTS[id].cost&&ARTIFACTS[id].enabled!==false);
+  if(!entries.length)return `<section class="game-screen">${heading(t('menu.workshop'),'',bank(session.profile))}<div class="screen-tabs" role="tablist" aria-label="${t('menu.workshop')}">${['blueprints','achievements'].map(tab=>`<button role="tab" data-workshop-tab="${tab}" id="tab-${tab}" aria-selected="${(tab==='blueprints')===blueprints}" aria-controls="workshop-panel">${t(`menu.${tab}`)}</button>`).join('')}</div><p class="empty-state">${t('menu.blueprintsEmpty')}</p></section>`;
   const page=paginate(entries,navigation.workshopPage,4),kind=blueprints?'blueprint':'achievement';
   const selected=page.items.includes(navigation[kind])?navigation[kind]:page.items[0],item=table[selected];
   const unlocked=blueprints?owned(session.profile,'artifact',selected,item):session.profile.achievements.includes(selected);
   const count=blueprints?entries.filter(id=>session.profile.unlocked.includes(`artifact:${id}`)).length:session.profile.achievements.length;
-  return `<section class="game-screen">${heading(t('menu.workshop'),'',bank(session.profile))}<div class="screen-tabs" role="tablist" aria-label="${t('menu.workshop')}">${['blueprints','achievements'].map(tab=>`<button role="tab" data-workshop-tab="${tab}" id="tab-${tab}" aria-selected="${(tab==='blueprints')===blueprints}" aria-controls="workshop-panel">${t(`menu.${tab}`)}</button>`).join('')}</div><div class="catalog" role="tabpanel" id="workshop-panel" aria-labelledby="tab-${blueprints?'blueprints':'achievements'}"><div class="catalog-sidebar"><nav class="catalog-list" aria-label="${t(`menu.${blueprints?'blueprints':'achievements'}`)}">${page.items.map(id=>selection(kind,id,table[id].name,blueprints?(session.profile.unlocked.includes(`artifact:${id}`)?t('workshop.owned'):`${table[id].cost} ✦`):(session.profile.achievements.includes(id)?t('menu.earned'):t('menu.notEarned')),id===selected)).join('')}</nav>${pager('workshop',page)}</div><article class="detail-card"><div class="detail-copy"><p class="eyebrow">${t(blueprints?'menu.progress':'menu.achievementProgress',{owned:count,total:entries.length})}</p><div class="detail-symbol">${blueprints?rune(selected):'<span class="achievement-star">✦</span>'}</div><h2>${item.name}</h2><p>${item.text}</p>${blueprints?`<p class="detail-secondary">${t('menu.blueprintBenefit')}</p><div class="detail-action">${purchaseControl(session,'artifact',selected,item)}</div>`:`<p class="achievement-state ${unlocked?'earned':''}">${unlocked?'✓':'◇'} ${t(unlocked?'menu.earned':'menu.notEarned')}</p><p class="detail-secondary">${t('menu.achievementReward')}</p>`}</div></article></div></section>`;
+  return `<section class="game-screen">${heading(t('menu.workshop'),'',bank(session.profile))}<div class="screen-tabs" role="tablist" aria-label="${t('menu.workshop')}">${['blueprints','achievements'].map(tab=>`<button role="tab" data-workshop-tab="${tab}" id="tab-${tab}" aria-selected="${(tab==='blueprints')===blueprints}" aria-controls="workshop-panel">${t(`menu.${tab}`)}</button>`).join('')}</div><div class="catalog" role="tabpanel" id="workshop-panel" aria-labelledby="tab-${blueprints?'blueprints':'achievements'}"><div class="catalog-sidebar"><nav class="catalog-list" aria-label="${t(`menu.${blueprints?'blueprints':'achievements'}`)}">${page.items.map(id=>selection(kind,id,escape(table[id].name),blueprints?(session.profile.unlocked.includes(`artifact:${id}`)?t('workshop.owned'):`${table[id].cost} ✦`):(session.profile.achievements.includes(id)?t('menu.earned'):t('menu.notEarned')),id===selected)).join('')}</nav>${pager('workshop',page)}</div><article class="detail-card"><div class="detail-copy"><p class="eyebrow">${t(blueprints?'menu.progress':'menu.achievementProgress',{owned:count,total:entries.length})}</p><div class="detail-symbol">${blueprints?rune(selected):'<span class="achievement-star">✦</span>'}</div><h2>${escape(item.name)}</h2><p>${escape(item.text)}</p>${blueprints?`<p class="detail-secondary">${t('menu.blueprintBenefit')}</p><div class="detail-action">${purchaseControl(session,'artifact',selected,item)}</div>`:`<p class="achievement-state ${unlocked?'earned':''}">${unlocked?'✓':'◇'} ${t(unlocked?'menu.earned':'menu.notEarned')}</p><p class="detail-secondary">${t('menu.achievementReward')}</p>`}</div></article></div></section>`;
 }
 
 /** The route inspector exposes one layer without changing the graph's entry restrictions. */
@@ -76,8 +78,9 @@ export function mapView(run,navigation={}){
 }
 
 export function rewardView(run,index=0){
+  const ARTIFACTS=artifactTable(run.artifactCatalog);
   const id=run.reward[index]??run.reward[0],item=ARTIFACTS[id],rare=run.rewardRarity==='rare';
-  return `<section class="game-screen">${heading(t('menu.reward'),t(rare?'reward.rareDescription':'reward.description'),`<button class="secondary-button" data-action="inventory">${t('menu.viewInventory',{count:run.artifacts.length})}</button>`)}<div class="catalog"><nav class="catalog-list" aria-label="${t('menu.reward')}">${run.reward.map((key,i)=>selection('reward',i,ARTIFACTS[key].name,t(rare?'reward.rare':'reward.artifact'),key===id)).join('')}</nav><article class="detail-card ${rare?'rare-detail':''}"><div class="detail-copy"><div class="detail-symbol">${rune(id)}</div><p class="eyebrow">${t(rare?'reward.rareKicker':'reward.kicker')}</p><h2>${item.name}</h2><p>${item.text}</p><div class="detail-action"><button class="primary-button" data-reward="${id}">${t('reward.take')} ${icon('arrow')}</button><p class="purchase-note">${t('reward.saved',{hp:run.hp,pendingEmbers:run.pendingEmbers})}</p></div></div></article></div></section>`;
+  return `<section class="game-screen">${heading(t('menu.reward'),t(rare?'reward.rareDescription':'reward.description'),`<button class="secondary-button" data-action="inventory">${t('menu.viewInventory',{count:run.artifacts.length})}</button>`)}<div class="catalog"><nav class="catalog-list" aria-label="${t('menu.reward')}">${run.reward.map((key,i)=>selection('reward',i,escape(ARTIFACTS[key].name),t(rare?'reward.rare':'reward.artifact'),key===id)).join('')}</nav><article class="detail-card ${rare?'rare-detail':''}"><div class="detail-copy"><div class="detail-symbol">${rune(id,ARTIFACTS)}</div><p class="eyebrow">${t(rare?'reward.rareKicker':'reward.kicker')}</p><h2>${escape(item.name)}</h2><p>${escape(item.text)}</p><div class="detail-action"><button class="primary-button" data-reward="${id}">${t('reward.take')} ${icon('arrow')}</button><p class="purchase-note">${t('reward.saved',{hp:run.hp,pendingEmbers:run.pendingEmbers})}</p></div></div></article></div></section>`;
 }
 export function eventView(run){
   const event=EVENTS[run.event];
@@ -89,8 +92,9 @@ export function resultView(session){
 }
 
 /** Compact inventory entries open full descriptions without expanding the list. */
-export function relicInventory(ids){
-  return `<div class="relic-inventory">${ids.map(id=>`<button data-relic="${id}" aria-label="${ARTIFACTS[id].name}: ${ARTIFACTS[id].text}">${rune(id)}<span>${ARTIFACTS[id].name}</span></button>`).join('')}</div>`;
+export function relicInventory(ids,catalog){
+  const ARTIFACTS=artifactTable(catalog);
+  return `<div class="relic-inventory">${ids.map(id=>`<button data-relic="${id}" aria-label="${escape(ARTIFACTS[id].name)}: ${escape(ARTIFACTS[id].text)}">${rune(id,ARTIFACTS)}<span>${escape(ARTIFACTS[id].name)}</span></button>`).join('')}</div>`;
 }
 
 /** Category pages and a single definition replace the growing disclosure document. */

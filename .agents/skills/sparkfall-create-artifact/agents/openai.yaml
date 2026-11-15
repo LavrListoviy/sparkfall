@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sparkfall: создать артефакт"
+  short_description: "Новые предметы из готовых эффектов с проверкой в игре"
+  default_prompt: "Используй $sparkfall-create-artifact, чтобы создать артефакт Sparkfall из готовых эффектов и проверить его по правилам проекта."

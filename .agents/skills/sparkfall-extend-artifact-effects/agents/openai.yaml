@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sparkfall: расширить эффекты"
+  short_description: "Новые механики предметов в ядре и конструкторе"
+  default_prompt: "Используй $sparkfall-extend-artifact-effects, чтобы добавить недостающую механику артефакта в ядро и конструктор Sparkfall через спецификацию и TDD."

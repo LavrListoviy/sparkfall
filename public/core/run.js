@@ -1,3 +1,5 @@
+import { LEGACY_ARTIFACTS } from './legacy-artifacts.js';
+import { catalogErrors } from './artifact-schema.js';
 import { Random } from './random.js';
 import { createBattle, playSwap, endRound, selectTarget, RULES_VERSION } from './battle.js';
 import { createRoute, reachableNodes } from './routes.js';
@@ -6,20 +8,20 @@ import { ARTIFACTS, LOADOUTS, EVENTS, ACHIEVEMENTS } from './content.js';
 
 export const isActive = session => Boolean(session.run && !session.run.settled);
 const copy = session => structuredClone(session);
-const available = (profile,kind,id) => (kind === 'artifact' ? ARTIFACTS : LOADOUTS)[id]?.cost === 0 || profile.unlocked.includes(`${kind}:${id}`);
+const available = (profile,kind,id,catalog=ARTIFACTS) => (kind === 'artifact' ? catalog : LOADOUTS)[id]?.cost === 0 || profile.unlocked.includes(`${kind}:${id}`);
 
 /** Create a versioned, offline profile. Unlocks expand choices without changing stats. */
 export function createSession() {
   return {schema:1,version:RULES_VERSION,profile:{currency:0,unlocked:[],achievements:[],stats:{runs:0,wins:0,bestDepth:0}},run:null};
 }
 /** Starting cannot overwrite an active expedition or use a locked loadout. */
-export function startRun(session,seed,loadout = 'coil',{routeVersion = 3,glyphVersion = routeVersion>=3?1:0} = {}) {
-  if (![0,1].includes(glyphVersion)) return session;
+export function startRun(session,seed,loadout = 'coil',{routeVersion = 3,glyphVersion = routeVersion>=3?1:0,artifactCatalog = routeVersion>=3&&glyphVersion===1?ARTIFACTS:LEGACY_ARTIFACTS} = {}) {
+  if (![0,1].includes(glyphVersion)||catalogErrors({schema:1,items:artifactCatalog}).length) return session;
   if (isActive(session) || !LOADOUTS[loadout] || !available(session.profile,'loadout',loadout)) return session;
   const next = copy(session); const random = new Random(String(seed).slice(0,80));
   const route = createRoute(random,routeVersion);
   next.profile.stats.runs++;
-  next.run = {seed:String(seed).slice(0,80),loadout,routeVersion,glyphVersion,initialUnlocks:[...next.profile.unlocked],rng:random.state,route,floor:0,phase:'map',hp:70,gap:4,artifacts:[LOADOUTS[loadout].artifact],pendingEmbers:0,reward:[],rewardRarity:'normal',rewardExhausted:null,event:null,battle:null,currentNode:null,chosen:[],history:[],settled:false,stats:{combats:0,swaps:0,maxCascade:0,earned:[]}};
+  next.run = {artifactCatalog:copy(artifactCatalog),seed:String(seed).slice(0,80),loadout,routeVersion,glyphVersion,initialUnlocks:[...next.profile.unlocked],rng:random.state,route,floor:0,phase:'map',hp:70,gap:4,artifacts:[LOADOUTS[loadout].artifact],pendingEmbers:0,reward:[],rewardRarity:'normal',rewardExhausted:null,event:null,battle:null,currentNode:null,chosen:[],history:[],settled:false,stats:{combats:0,swaps:0,maxCascade:0,earned:[]}};
   return next;
 }
 /** Enter exactly one offered node; travel grants distance only after the first floor. */
@@ -33,7 +35,7 @@ export function enterNode(session,id) {
   r.currentNode = node.id; r.chosen.push(node.id); r.history.push({type:'enter',id});
   if (node.enemyIds) {
     r.phase = 'battle';
-    r.battle = createBattle(`${r.seed}:${node.id}`,{enemyIds:node.enemyIds,paired:node.enemyIds.length > 1,stormGap:r.gap,hp:r.hp,artifacts:r.artifacts,room:r.floor+1,ruleset:r.routeVersion>=3?2:1,encounterScale:node.encounterScale??1,glyphVersion:r.glyphVersion,loadout:r.loadout});
+    r.battle = createBattle(`${r.seed}:${node.id}`,{enemyIds:node.enemyIds,paired:node.enemyIds.length > 1,stormGap:r.gap,hp:r.hp,artifacts:r.artifacts,room:r.floor+1,ruleset:r.routeVersion>=3?2:1,encounterScale:node.encounterScale??1,glyphVersion:r.glyphVersion,loadout:r.loadout,artifactCatalog:r.artifactCatalog??LEGACY_ARTIFACTS});
   } else { r.phase = node.kind; r.event = inStorm(r.gap)&&node.stormEvent?node.stormEvent:node.event; }
   return next;
 }
@@ -51,10 +53,12 @@ function settle(session,phase) {
 }
 function reward(run,profile,rarity='normal') {
   const random = new Random(run.rng);
-  const pool = Object.keys(ARTIFACTS).filter(id => {
-    const item=ARTIFACTS[id];
+  const catalog=run.artifactCatalog??LEGACY_ARTIFACTS;
+  const pool = Object.keys(catalog).filter(id => {
+    const item=catalog[id];
+    if(!item.enabled)return false;
     if (item.introduced>=4 && run.glyphVersion!==1) return false;
-    return !run.artifacts.includes(id) && (run.routeVersion<3 ? !item.introduced&&available(profile,'artifact',id) : rarity==='rare' ? item.rarity==='rare' : item.rarity!=='rare'&&available(profile,'artifact',id));
+    return !run.artifacts.includes(id) && (run.routeVersion<3 ? !item.introduced&&available(profile,'artifact',id,catalog) : rarity==='rare' ? item.rarity==='rare' : item.rarity!=='rare'&&available(profile,'artifact',id,catalog));
   });
   run.rewardRarity=rarity;run.rewardExhausted=null;
   run.reward = [];
@@ -100,7 +104,7 @@ export function chooseReward(session,id) {
 }
 /** Explain disabled choices using the same predicate as event resolution. */
 export function choiceBlocked(run,choice) {
-  const blocked=healingBlock(run.gap,run.artifacts,run.routeVersion>=3?2:1);
+  const blocked=healingBlock(run.gap,run.artifacts,run.routeVersion>=3?2:1,run.artifactCatalog);
   if (choice.heal && blocked) return blocked==='heart'?'Сердце бури запрещает лечение вне шторма':'Шторм блокирует лечение';
   if (choice.artifact && run.artifacts.includes(choice.artifact)) return 'Этот артефакт уже есть';
   if (choice.hp && run.hp + choice.hp <= 0) return 'Недостаточно здоровья';
@@ -133,7 +137,7 @@ export function buyUnlock(session,key) {
   if (isActive(session) || session.profile.unlocked.includes(key)) return session;
   const [kind,id] = key.split(':');
   const item = kind === 'artifact' ? ARTIFACTS[id] : kind === 'loadout' ? LOADOUTS[id] : null;
-  if (!item?.cost || item.cost > session.profile.currency) return session;
+  if (item?.enabled===false || !item?.cost || item.cost > session.profile.currency) return session;
   const next = copy(session); next.profile.currency -= item.cost; next.profile.unlocked.push(key);
   return next;
 }

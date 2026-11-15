@@ -13,4 +13,4 @@ function collect(item,english,prefix){
     collect(child,translated,`${prefix}.${list}.${child.id??i}`);
   }
 }
-for(const [kind,table] of Object.entries(contentTables))for(const [id,item] of Object.entries(table))collect(item,englishContent[kind]?.[id],`${kind}.${id}`);
+for(const [kind,table] of Object.entries(contentTables))for(const [id,item] of Object.entries(table))collect(item,item.en??englishContent[kind]?.[id],`${kind}.${id}`);
