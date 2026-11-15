@@ -7,7 +7,7 @@ const root = fileURLToPath(new URL('../public/', import.meta.url));
 const args = process.argv.slice(2);
 const host = args.includes('--host') ? args[args.indexOf('--host') + 1] : '127.0.0.1';
 const port = Number(args.includes('--port') ? args[args.indexOf('--port') + 1] : 4173);
-const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.json': 'application/json; charset=utf-8' };
+const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.json': 'application/json; charset=utf-8', '.ttf': 'font/ttf' };
 
 // Serve only the public directory, never project documents or test fixtures.
 const server = http.createServer(async (request, response) => {

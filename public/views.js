@@ -1,66 +1,101 @@
-import { ARTIFACTS, ENEMIES, LOADOUTS, ACHIEVEMENTS, EVENTS } from './core/content.js';
+import { t, getLanguage, number, tileName } from './i18n/index.js';
+import { glyphWeights } from './core/glyphs.js';
+import { TYPES } from './core/board.js';
+import { RULES_VERSION } from './core/battle.js';
+import { ARTIFACTS, ENEMIES, LOADOUTS, ACHIEVEMENTS, EVENTS } from './i18n/content.js';
 import { isActive, choiceBlocked } from './core/run.js';
-import { reachableNodes } from './core/routes.js';
-import { inStorm, stormDepth, meteorDamage, travelGain, travelForecast } from './core/storm.js';
+import { inStorm, stormDepth, travelForecast } from './core/storm.js';
+import { errorText } from './i18n/errors.js';
+import { glossaryGroups, glossaryTerms } from './i18n/glossary-data.js';
+import { createNavigation, paginate, routeSelection } from './presentation/navigation.js';
 import { icon } from './icons.js';
 
-export const escape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const portrait = (index, label) => `<span class="pixel-portrait" role="img" aria-label="${label}" style="--sprite-x:${index%2*100}%;--sprite-y:${Math.floor(index/2)*100/3}%"></span>`;
-const rune = id => `<span class="relic-rune ${ARTIFACTS[id].color}">${icon(ARTIFACTS[id].icon)}</span>`;
-const owned = (profile,kind,id,item) => item.cost === 0 || profile.unlocked.includes(`${kind}:${id}`);
-const heading = (kicker,title,body) => `<div class="view-heading"><p class="eyebrow">${kicker}</p><h1 tabindex="-1">${title}</h1>${body ? `<p>${body}</p>` : ''}</div>`;
-export const weatherLabel = gap => inStorm(gap) ? `Глубина ${stormDepth(gap)}` : `Отрыв ${gap}`;
+export const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const portrait=(index,label)=>`<span class="pixel-portrait" role="img" aria-label="${label}" style="--sprite-x:${index%2*100}%;--sprite-y:${Math.floor(index/2)*100/3}%"></span>`;
+const rune=id=>`<span class="relic-rune ${ARTIFACTS[id].color}">${icon(ARTIFACTS[id].icon)}</span>`;
+const owned=(profile,kind,id,item)=>item.cost===0||profile.unlocked.includes(`${kind}:${id}`);
+export const weatherLabel=gap=>inStorm(gap)?t('weather.depth',{depth:stormDepth(gap)}):t('weather.lead',{gap});
 
-/** Compact, tappable artifact inventory with complete descriptions in a dialog. */
-export function relicInventory(ids) {
+/** Show nominal generation probabilities and their sources, never a quota for the visible board. */
+export function glyphFrequencyView(run){
+  const weighted=run?.glyphVersion===1,loadout=weighted?run.loadout:'coil',artifacts=weighted?run.artifacts:[];
+  const weights=glyphWeights(loadout,artifacts),total=Object.values(weights).reduce((a,b)=>a+b,0);
+  return `<p class="modal-kicker">${t('glyph.kicker')}</p><h2>${t('glyph.title')}</h2><p class="glyph-explanation">${t(weighted?'glyph.explanation':'glyph.legacy')}</p><dl class="glyph-frequencies">${TYPES.map(type=>{
+    const sources=[...(LOADOUTS[loadout]?.glyphBonus?.[type]?[LOADOUTS[loadout].name]:[]),...artifacts.filter(id=>ARTIFACTS[id]?.glyphBonus?.[type]).map(id=>ARTIFACTS[id].name)];
+    return `<div><dt><span class="${type}">${icon(type)}</span><span>${tileName(type)}<small>${sources.join(' · ')||t('glyph.base')}</small></span></dt><dd>${number(Math.round(weights[type]/total*1000)/10)}%</dd></div>`;
+  }).join('')}</dl><p class="glyph-note">${t('glyph.constraint')}</p>`;
+}
+const back=()=>`<button class="text-button screen-back" data-action="home">← ${t('menu.backMain')}</button>`;
+const heading=(title,description='',aside='')=>`<header class="screen-heading"><div>${back()}<h1 tabindex="-1">${title}</h1>${description?`<p>${description}</p>`:''}</div>${aside}</header>`;
+const bank=profile=>`<div class="menu-bank">${icon('spark')}<strong>${profile.currency}</strong><span>${t('currency.unit',{count:profile.currency})}</span></div>`;
+const selection=(kind,id,name,subtitle,selected)=>`<button class="catalog-choice" data-select="${kind}" data-value="${id}" aria-pressed="${selected}" id="choice-${kind}-${id}"><span>${name}</span>${subtitle?`<small>${subtitle}</small>`:''}</button>`;
+
+/** Page controls keep both directions explicit and reachable by keyboard. */
+export function pager(kind,{page,pages}){
+  return `<nav class="page-controls" aria-label="${t('menu.page',{page:page+1,pages})}"><button class="secondary-button" data-page="${kind}" data-page-value="${page-1}" aria-label="${t('menu.previous')}" ${page===0?'disabled':''}>←</button><span>${t('menu.page',{page:page+1,pages})}</span><button class="secondary-button" data-page="${kind}" data-page-value="${page+1}" aria-label="${t('menu.next')}" ${page+1===pages?'disabled':''}>→</button></nav>`;
+}
+
+/** Main-menu navigation does not render purchasing or loadout controls. */
+export function homeView(session){
+  const active=isActive(session);
+  return `<section class="main-menu"><div class="menu-scenery" aria-hidden="true">${portrait(0,'')}</div><div class="main-menu-content"><p class="menu-emblem" aria-hidden="true">✦</p><h1 tabindex="-1">${t('shell.brand')}</h1><nav class="main-menu-actions" aria-label="${t('menu.main')}">${active?`<button class="primary-button" data-action="continue">${t('home.continue')} ${icon('arrow')}</button>`:''}<button class="${active?'menu-button':'primary-button'}" data-action="prepare">${t('menu.new')}</button>${session.run&&!active?`<button class="menu-button" data-screen="run">${t('menu.lastResult')}</button>`:''}<button class="menu-button" data-screen="workshop">${t('menu.workshop')}</button><button class="menu-button" data-action="settings">${t('shell.settings')}</button><button class="menu-button" data-action="guide">${t('menu.guide')}</button></nav>${active?`<p class="menu-save">${t('home.savedRun',{node:Math.min(8,session.run.floor+1),hp:session.run.hp})}</p>`:''}</div><span class="menu-version">${RULES_VERSION}</span></section>`;
+}
+
+/** One loadout is inspected at a time; buying it never starts a run implicitly. */
+export function loadoutView(session,selected='coil'){
+  const id=LOADOUTS[selected]?selected:'coil',item=LOADOUTS[id],artifact=ARTIFACTS[item.artifact];
+  const unlocked=owned(session.profile,'loadout',id,item),active=isActive(session);
+  return `<section class="game-screen">${heading(t('menu.chooseLoadout'),'',bank(session.profile))}<div class="catalog loadout-catalog"><nav class="catalog-list" aria-label="${t('menu.prepare')}">${Object.entries(LOADOUTS).map(([key,value])=>selection('loadout',key,value.name,value.subtitle,key===id)).join('')}</nav><article class="detail-card loadout-detail"><div class="detail-hero" aria-hidden="true">${portrait(0,'')}</div><div class="detail-copy"><p class="eyebrow">${item.subtitle}</p><h2>${item.name}</h2><p class="detail-facts">${t('home.loadoutDescription')}</p><div class="artifact-description">${rune(item.artifact)}<div><small>${t('menu.startingArtifact')}</small><h3>${artifact.name}</h3></div></div><p>${artifact.text}</p><div class="glyph-affinity"><p>${t(`glyph.affinity.${id}`)}</p><button class="text-button" data-glyph-loadout="${id}">${t('glyph.title')} →</button></div><div class="detail-action">${unlocked?`<button class="primary-button" data-action="start" ${active?'disabled':''}>${t('menu.start')} ${icon('arrow')}</button>`:purchaseControl(session,'loadout',id,item)}</div></div></article></div></section>`;
+}
+function purchaseControl(session,kind,id,item){
+  if(owned(session.profile,kind,id,item))return `<p class="owned-label">✓ ${t('workshop.owned')}</p>`;
+  const blocked=isActive(session),missing=Math.max(0,item.cost-session.profile.currency);
+  return `<button class="primary-button" data-unlock="${kind}:${id}" ${blocked||missing?'disabled':''}>${t('menu.buy',{cost:item.cost})}</button>${blocked?`<p class="purchase-note">${t('workshop.betweenRuns')}</p>`:missing?`<p class="purchase-note">${t('menu.needSparks',{count:missing})}</p>`:''}`;
+}
+
+/** Purchases re-render this view against the same navigation selection and page. */
+export function workshopView(session,navigation=createNavigation()){
+  const blueprints=navigation.workshopTab!=='achievements',table=blueprints?ARTIFACTS:ACHIEVEMENTS;
+  const entries=Object.keys(table).filter(id=>!blueprints||ARTIFACTS[id].cost);
+  const page=paginate(entries,navigation.workshopPage,4),kind=blueprints?'blueprint':'achievement';
+  const selected=page.items.includes(navigation[kind])?navigation[kind]:page.items[0],item=table[selected];
+  const unlocked=blueprints?owned(session.profile,'artifact',selected,item):session.profile.achievements.includes(selected);
+  const count=blueprints?entries.filter(id=>session.profile.unlocked.includes(`artifact:${id}`)).length:session.profile.achievements.length;
+  return `<section class="game-screen">${heading(t('menu.workshop'),'',bank(session.profile))}<div class="screen-tabs" role="tablist" aria-label="${t('menu.workshop')}">${['blueprints','achievements'].map(tab=>`<button role="tab" data-workshop-tab="${tab}" id="tab-${tab}" aria-selected="${(tab==='blueprints')===blueprints}" aria-controls="workshop-panel">${t(`menu.${tab}`)}</button>`).join('')}</div><div class="catalog" role="tabpanel" id="workshop-panel" aria-labelledby="tab-${blueprints?'blueprints':'achievements'}"><div class="catalog-sidebar"><nav class="catalog-list" aria-label="${t(`menu.${blueprints?'blueprints':'achievements'}`)}">${page.items.map(id=>selection(kind,id,table[id].name,blueprints?(session.profile.unlocked.includes(`artifact:${id}`)?t('workshop.owned'):`${table[id].cost} ✦`):(session.profile.achievements.includes(id)?t('menu.earned'):t('menu.notEarned')),id===selected)).join('')}</nav>${pager('workshop',page)}</div><article class="detail-card"><div class="detail-copy"><p class="eyebrow">${t(blueprints?'menu.progress':'menu.achievementProgress',{owned:count,total:entries.length})}</p><div class="detail-symbol">${blueprints?rune(selected):'<span class="achievement-star">✦</span>'}</div><h2>${item.name}</h2><p>${item.text}</p>${blueprints?`<p class="detail-secondary">${t('menu.blueprintBenefit')}</p><div class="detail-action">${purchaseControl(session,'artifact',selected,item)}</div>`:`<p class="achievement-state ${unlocked?'earned':''}">${unlocked?'✓':'◇'} ${t(unlocked?'menu.earned':'menu.notEarned')}</p><p class="detail-secondary">${t('menu.achievementReward')}</p>`}</div></article></div></section>`;
+}
+
+/** The route inspector exposes one layer without changing the graph's entry restrictions. */
+export function mapView(run,navigation={}){
+  const {floor,node,canEnter}=routeSelection(run,navigation.mapFloor,navigation.mapNode),current=floor===run.floor;
+  const forecast=travelForecast(run,node),rare=current&&node.kind==='elite'&&inStorm(forecast);
+  const eventId=current&&inStorm(forecast)&&node.stormEvent?node.stormEvent:node.event;
+  const title=n=>n.enemyIds?n.enemyIds.map(id=>ENEMIES[id].name).join(' · '):!current&&n.stormEvent?t('node.weatherEncounter'):EVENTS[current&&inStorm(travelForecast(run,n))&&n.stormEvent?n.stormEvent:n.event].name;
+  const kind=n=>t(`node.${n.kind==='rest'?'rest':n.kind==='event'?'event':n.kind==='boss'?'boss':n.kind==='elite'?'elite':'battle'}`);
+  const imageIndex={furnace:1,sentinel:2,collector:3,guardian:4,jailer:5,alchemist:6,heart:7}[node.enemyIds?.[0]]??0;
+  return `<section class="game-screen route-screen">${heading(t('menu.map'),t('menu.stage',{floor:floor+1}),`<div class="run-resources"><span>${t('menu.health',{hp:run.hp})}</span><span>${weatherLabel(run.gap)}</span><button class="text-button" data-action="inventory">${t('menu.viewInventory',{count:run.artifacts.length})}</button></div>`)}<nav class="route-stages" aria-label="${t('menu.map')}">${run.route.map((_,i)=>`<button data-map-floor="${i}" aria-pressed="${i===floor}" aria-label="${t('menu.stageLabel',{floor:i+1})}" ${i===run.floor?'aria-current="step"':''}><span>${run.chosen.some(id=>id.startsWith(`${i}-`))?'✓':i+1}</span>${i===run.floor?'<b>◆</b>':''}</button>`).join('')}</nav><div class="catalog"><nav class="catalog-list" aria-label="${t('menu.stage',{floor:floor+1})}">${run.route[floor].map(n=>selection('mapNode',n.id,title(n),`${kind(n)}${run.routeVersion>=3?` · ${t('menu.lane',{lane:n.lane+1})}`:''}`,n.id===node.id)).join('')}</nav><article class="detail-card route-detail"><div class="route-figure" aria-hidden="true">${portrait(imageIndex,'')}</div><div class="detail-copy"><p class="eyebrow">${t(current?'menu.currentStage':'menu.previewStage')}</p><h2>${title(node)}</h2><p>${node.enemyIds?ENEMIES[node.enemyIds[0]].flavor:EVENTS[eventId].text}</p><div class="travel-summary"><strong>${current?t('menu.forecast',{weather:weatherLabel(forecast)}):t('menu.baseTravel',{gain:node.travel??3})}</strong><p>${node.kind==='elite'?t(rare?'node.rareLoot':'node.rareCondition'):node.kind==='battle'?t('node.artifactLoot'):node.kind==='boss'?t('node.finale'):t('node.choices')}</p></div>${node.next?`<p class="detail-secondary">${t('menu.connections',{lanes:node.next.map(id=>Number(id.split('-')[1])+1).join(' · ')})}</p>`:''}<div class="detail-action"><button class="primary-button" data-node="${node.id}" ${canEnter?'':'disabled'}>${t('menu.travel')} ${icon('arrow')}</button><p class="purchase-note">${t(!current?'menu.previewHint':canEnter?'menu.currentStageHint':'menu.noConnection')}</p></div></div></article></div></section>`;
+}
+
+export function rewardView(run,index=0){
+  const id=run.reward[index]??run.reward[0],item=ARTIFACTS[id],rare=run.rewardRarity==='rare';
+  return `<section class="game-screen">${heading(t('menu.reward'),t(rare?'reward.rareDescription':'reward.description'),`<button class="secondary-button" data-action="inventory">${t('menu.viewInventory',{count:run.artifacts.length})}</button>`)}<div class="catalog"><nav class="catalog-list" aria-label="${t('menu.reward')}">${run.reward.map((key,i)=>selection('reward',i,ARTIFACTS[key].name,t(rare?'reward.rare':'reward.artifact'),key===id)).join('')}</nav><article class="detail-card ${rare?'rare-detail':''}"><div class="detail-copy"><div class="detail-symbol">${rune(id)}</div><p class="eyebrow">${t(rare?'reward.rareKicker':'reward.kicker')}</p><h2>${item.name}</h2><p>${item.text}</p><div class="detail-action"><button class="primary-button" data-reward="${id}">${t('reward.take')} ${icon('arrow')}</button><p class="purchase-note">${t('reward.saved',{hp:run.hp,pendingEmbers:run.pendingEmbers})}</p></div></div></article></div></section>`;
+}
+export function eventView(run){
+  const event=EVENTS[run.event];
+  return `<section class="game-screen event-screen">${heading(event.name,t(run.phase==='rest'?'event.restKicker':'event.kicker'),`<div class="run-resources"><span>${t('menu.health',{hp:run.hp})}</span><span>${weatherLabel(run.gap)}</span></div>`)}<article class="event-content"><div class="event-story"><span class="story-icon">${icon(event.icon)}</span><p>${event.text}</p></div><div class="event-decisions">${event.choices.map(c=>`<button class="event-choice" data-choice="${c.id}" ${choiceBlocked(run,c)?'disabled':''}><span><strong>${c.name}</strong><small>${errorText(choiceBlocked(run,c))||c.text}</small></span>${icon('arrow')}</button>`).join('')}<p class="purchase-note">${t('event.finalChoice')}</p></div></article></section>`;
+}
+export function resultView(session){
+  const r=session.run,won=r.phase==='won';
+  return `<section class="game-screen result-screen"><div class="result-scenery" aria-hidden="true">${portrait(won?7:0,'')}</div><div class="result-content"><p class="eyebrow">${t(won?'result.wonKicker':'result.lostKicker')}</p><h1 tabindex="-1">${t(won?'result.wonTitle':'result.lostTitle')}</h1><p>${t(won?'result.wonStory':'result.lostStory')}</p><div class="result-stats"><span>${t('result.victoriesLabel')}<b>${r.stats.combats}</b></span><span>${t('result.swapsLabel')}<b>${r.stats.swaps}</b></span><span>${t('result.wavesLabel')}<b>${r.stats.maxCascade}</b></span></div><p class="result-currency">✦ ${t('result.sparks',{count:r.pendingEmbers})}</p>${r.stats.earned.length?`<p class="purchase-note">${t('result.achievements',{names:r.stats.earned.map(id=>ACHIEVEMENTS[id].name).join(' · ')})}</p>`:''}<div class="result-actions"><button class="primary-button" data-action="home">${t('menu.backMain')}</button><button class="secondary-button" data-action="report">${t('result.report')}</button></div></div></section>`;
+}
+
+/** Compact inventory entries open full descriptions without expanding the list. */
+export function relicInventory(ids){
   return `<div class="relic-inventory">${ids.map(id=>`<button data-relic="${id}" aria-label="${ARTIFACTS[id].name}: ${ARTIFACTS[id].text}">${rune(id)}<span>${ARTIFACTS[id].name}</span></button>`).join('')}</div>`;
 }
-export function homeView(session,loadout) {
-  const {profile} = session; const active = isActive(session);
-  return `<section class="home-hero"><div class="home-art">${portrait(0,'Инженер-алхимик в нижнем городе')}<span class="art-caption">ЭКСПЕДИЦИЯ 01 · НИЖНИЙ ГОРОД</span></div><div class="home-copy"><p class="eyebrow">ТАКТИЧЕСКОЕ ТРИ В РЯД · РОГЛАЙТ</p><h1>Пока горит<br>твоя <em>искра.</em></h1><p>Город захлёбывается магическим штормом.<br>Собери матрицу. Пробейся к котельной.<br>Останови то, что бьётся в её сердце.</p><div class="home-facts"><span>8 остановок</span><span>1 герой</span><span>2 действия</span></div>${active ? `<button class="primary-button" data-action="continue">Продолжить экспедицию ${icon('arrow')}</button><p class="save-hint">Остановка ${Math.min(8,session.run.floor+1)} из 8 · ${session.run.hp} здоровья · сохранено</p>` : `<button class="primary-button" data-action="start">Войти в нижний город ${icon('arrow')}</button><p class="save-hint">Раздумья не расходуют время. Шторм ждёт твоего хода.</p>`}</div></section>
-  <section class="loadout-section"><div class="section-heading"><div><p class="eyebrow">СНАРЯЖЕНИЕ ЭКСПЕДИТОРА</p><h2>Одна искра. Разные подходы.</h2></div><div class="spark-bank">${icon('spark')}<strong>${profile.currency}</strong><span>искр</span></div></div><div class="loadout-grid">${Object.entries(LOADOUTS).map(([id,item])=>{
-    const unlocked=owned(profile,'loadout',id,item);
-    return `<button class="loadout-card ${id === loadout ? 'chosen' : ''} ${unlocked ? '' : 'locked-loadout'}" ${active ? 'disabled' : ''} ${unlocked ? `data-loadout="${id}" aria-pressed="${id===loadout}"` : `data-unlock="loadout:${id}" ${profile.currency<item.cost?'disabled':''}`} >${rune(item.artifact)}<span class="loadout-text"><small>${item.subtitle}</small><strong>${item.name}</strong><span>${ARTIFACTS[item.artifact].text}</span></span><span class="loadout-check">${unlocked ? id===loadout?'◆':'◇' : `${item.cost} ✦`}</span></button>`;
-  }).join('')}</div><p class="section-note">Каждый набор: 70 здоровья, два действия, один артефакт. Открытия дают новые способы играть.</p></section>
-  <div class="meta-grid"><details class="meta-panel"><summary><span>Чертежи мастерской<small>Новые артефакты в наградах</small></span><b>${profile.unlocked.filter(x=>x.startsWith('artifact:')).length} / ${Object.values(ARTIFACTS).filter(a=>a.cost).length}</b></summary><div class="blueprint-list">${Object.entries(ARTIFACTS).filter(([,a])=>a.cost).map(([id,item])=>{
-    const unlocked=owned(profile,'artifact',id,item);
-    return `<div class="blueprint">${rune(id)}<div><strong>${item.name}</strong><p>${item.text}</p></div><button class="secondary-button" data-unlock="artifact:${id}" ${unlocked || active || profile.currency<item.cost ? 'disabled' : ''}>${unlocked?'Открыто':`${item.cost} ✦`}</button></div>`;
-  }).join('')}</div>${active?'<p class="section-note">Мастерская доступна между экспедициями.</p>':''}</details><details class="meta-panel"><summary><span>Полевые достижения<small>По одной искре за открытие</small></span><b>${profile.achievements.length} / ${Object.keys(ACHIEVEMENTS).length}</b></summary><div class="achievement-list">${Object.entries(ACHIEVEMENTS).map(([id,a])=>`<div class="achievement ${profile.achievements.includes(id)?'earned':''}"><span>${profile.achievements.includes(id)?'✦':'◇'}</span><div><strong>${a.name}</strong><p>${a.text}</p></div></div>`).join('')}</div></details></div>`;
-}
-export function mapView(run) {
-  if(run.routeVersion>=3)return graphView(run);
-  const nodeTitle=n=>n.enemyIds ? n.enemyIds.map(id=>ENEMIES[id].name).join(' + ') : EVENTS[n.event].name;
-  const kindName={battle:'БОЙ',elite:'ЭЛИТА',boss:'БОСС',event:'СОБЫТИЕ',rest:'ПРИВАЛ'};
-  return `${heading('МАРШРУТ ЭКСПЕДИЦИИ','Через город. К сердцу.','Выбери следующий узел. Переход даёт +3 к отрыву от шторма, максимум до 6.')}<div class="map-layout"><aside class="route-sidebar"><div class="route-illustration">${portrait(5,'Рунный тюремщик')}</div><div class="expedition-stats"><span>${icon('heart')}<b>${run.hp}</b> / 70</span><span>${icon('spark')}<b>${run.pendingEmbers}</b> в этом забеге</span></div><div class="route-storm ${run.gap===0?'caught':''}">${icon('storm')}<div><strong>${run.gap===0?'Шторм настиг тебя':`Отрыв от шторма: ${run.gap}`}</strong><p>Дальше — ${run.floor===0?run.gap:Math.min(6,run.gap+3)}. В пути метеориты не падают.</p></div></div><p class="eyebrow">АРТЕФАКТЫ · ${run.artifacts.length}</p>${relicInventory(run.artifacts)}<p class="section-note">Здоровье переносится между комнатами. Кратеры и цепи остаются в предыдущем бою.</p></aside><div class="route-path">${run.route.map((layer,floor)=>`<div class="route-row ${floor===run.floor?'current':''} ${floor<run.floor?'passed':''}"><div class="route-number">${floor<run.floor?'✓':String(floor+1).padStart(2,'0')}</div><div class="route-options">${layer.map(node=>`<button class="route-node ${node.kind} ${run.chosen.includes(node.id)?'visited':''}" data-node="${node.id}" ${floor!==run.floor?'disabled':''}><span class="node-symbol">${icon(node.kind==='boss'?'storm':node.kind==='rest'?'heal':node.kind==='event'?'compass':'steel')}</span><span><small>${kindName[node.kind]}</small><strong>${nodeTitle(node)}</strong>${node.enemyIds?`<span class="node-detail">${node.enemyIds.length===3?'Три ослабленных противника':node.enemyIds.length===2?'Два ослабленных противника':node.kind==='elite'?'Меняет клетки матрицы':node.kind==='boss'?'Две фазы · поле изменится':'Видимое намерение'}</span>`:'<span class="node-detail">Последствия видны до выбора</span>'}</span>${floor===run.floor?'<span class="node-arrow">↗</span>':''}</button>`).join('')}</div></div>`).join('')}</div></div>`;
-}
-/** Every line is an actual route edge; only reachable current nodes accept input. */
-function graphView(run) {
-  const reachable=new Set(reachableNodes(run).map(n=>n.id));
-  const names={battle:'БОЙ',elite:'ЭЛИТА',boss:'СЕРДЦЕ',event:'ВСТРЕЧА',rest:'ПРИВАЛ'};
-  const position=(node,layer)=>layer.length===1?50:node.lane*33.333+16.667;
-  const rows=run.route.map((layer,floor)=>{
-    const links=run.route[floor+1];
-    const edges=links?`<svg class="route-edges" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true">${layer.flatMap(node=>node.next.map(id=>{const to=links.find(n=>n.id===id);return `<path class="${run.chosen.includes(node.id)?'taken':''}" d="M ${position(node,layer)} 0 L ${position(to,links)} 24"/>`;})).join('')}</svg>`:'';
-    return `<div class="graph-layer ${floor===run.floor?'current':''} ${floor<run.floor?'passed':''}"><span class="graph-step">${floor<run.floor?'✓':floor+1}</span><div class="graph-nodes ${layer.length===1?'single':''}">${layer.map(node=>{
-      const current=floor===run.floor,forecast=travelForecast(run,node);
-      const gain=current?travelGain(run,node):floor===0?0:node.travel-Number(run.artifacts.includes('overclock'));
-      const weatherEvent=inStorm(forecast)&&node.stormEvent?node.stormEvent:node.event;
-      const title=node.enemyIds?node.enemyIds.map(id=>ENEMIES[id].name).join(' · '):node.stormEvent&&!current?'Погодная встреча':EVENTS[weatherEvent].name;
-      const rare=current&&node.kind==='elite'&&inStorm(forecast);
-      return `<button class="graph-node ${node.kind} ${run.chosen.includes(node.id)?'visited':''}" data-node="${node.id}" ${current&&reachable.has(node.id)?'':'disabled'}><small>${names[node.kind]}${node.encounterScale===.8?' · −20%':''}</small><strong>${title}</strong><span class="travel-tag">${current?'Переход':'База'} ${gain>=0?'+':''}${gain}</span>${current?`<span class="weather-tag ${inStorm(forecast)?'danger':''}">${weatherLabel(forecast)}</span>`:''}<span class="node-loot ${rare?'rare':''}">${node.kind==='elite'?(rare?'✦ Редкий трофей*':'✧ Редкий: вход и победа в шторме'):node.kind==='battle'?'◇ Артефакт':node.stormEvent?'☄ Встреча зависит от погоды':node.kind==='rest'?'Восстановление / отрыв':node.kind==='boss'?'Финал экспедиции':'Выбор последствий'}</span></button>`;
-    }).join('')}</div>${edges}</div>`;
-  }).join('');
-  return `${heading('МАРШРУТ ЭКСПЕДИЦИИ','У шторма есть глубина.','Соседние пути связаны переходами. Транзит даёт отрыв; штормовой путь ведёт к элитам и редким находкам.')}<div class="map-layout graph-layout"><aside class="route-sidebar"><div class="route-illustration">${portrait(0,'Инженер-алхимик')}</div><div class="expedition-stats"><span>${icon('heart')}<b>${run.hp}</b> / 70</span><span>${icon('spark')}<b>${run.pendingEmbers}</b> искр</span></div><div class="route-storm ${inStorm(run.gap)?'caught':''}">${icon('storm')}<div><strong>${weatherLabel(run.gap)}</strong><p>${inStorm(run.gap)?`Базовый урон на этой глубине: ${meteorDamage(run.gap)}. На большей глубине — до 8.`:'Каждый полный раунд приближает фронт на 1.'}</p></div></div>${run.rewardExhausted?`<p class="loot-notice">Все ${run.rewardExhausted==='rare'?'редкие ':''}артефакты уже собраны. Получено +${run.rewardExhausted==='rare'?4:2} искры.</p>`:''}<p class="eyebrow">СБОРКА · ${run.artifacts.length}</p>${relicInventory(run.artifacts)}<p class="section-note">* Редкий трофей: войти в бой с элитой внутри шторма и победить там же. Переход учтён в прогнозе.</p>${run.artifacts.includes('overclock')?'<p class="section-note">Форсированный привод: 3 действия; все переходы −1 к отрыву.</p>':''}</aside><div class="route-graph"><div class="lane-headings"><span>ТРАНЗИТ<small>Отрыв +4</small></span><span>ПОИСК<small>Отрыв +2</small></span><span>ШТОРМ<small>Отрыв +0</small></span></div>${rows}<p class="section-note">В заголовках — базовый отрыв. На текущих узлах — точный прогноз. Дальше — база с разгоном, без условного бонуса компаса. В пути метеориты не падают.</p></div></div>`;
-}
-export function rewardView(run) {
-  const rare=run.rewardRarity==='rare';
-  return `<div class="reward-view ${rare?'rare-reward':''}">${heading(rare?'ЭЛИТА ПОВЕРЖЕНА В ШТОРМЕ · РЕДКАЯ НАГРАДА':'БОЙ ЗАКОНЧЕН · НАГРАДА',rare?'Находки из самого пекла.':'У каждой находки — свой характер.',rare?'Ты вошёл в бой и победил внутри шторма. Выбери один редкий артефакт для своей сборки.':'Выбери один артефакт. Он останется с тобой до конца этой экспедиции.')}<div class="reward-grid">${run.reward.map(id=>`<button class="reward-card" data-reward="${id}"><span class="card-serial">${rare?'✦ РЕДКИЙ':'АРТЕФАКТ'} · ${String(Object.keys(ARTIFACTS).indexOf(id)+1).padStart(2,'0')}</span>${rune(id)}<h2>${ARTIFACTS[id].name}</h2><p>${ARTIFACTS[id].text}</p><span class="take-relic">Забрать ${icon('arrow')}</span></button>`).join('')}</div><p class="reward-footnote">${run.hp} здоровья · ${run.pendingEmbers} искр заработано · выбор уже сохранён, перезагрузка его не изменит.</p><details class="inventory-details"><summary>Твоя сборка · ${run.artifacts.length}</summary>${relicInventory(run.artifacts)}</details></div>`;
-}
-export function eventView(run) {
-  const event=EVENTS[run.event];
-  return `<div class="event-view"><div class="event-symbol">${icon(event.icon)}</div>${heading(run.phase==='rest'?'ПРИВАЛ · ПЕРЕД КОТЕЛЬНОЙ':'СЛУЧАЙНАЯ ВСТРЕЧА',event.name,event.text)}<div class="event-status"><span>${icon('heart')} ${run.hp} / 70</span><span>${icon('storm')} ${weatherLabel(run.gap)}</span></div><div class="event-choices">${event.choices.map(c=>`<button class="event-choice" data-choice="${c.id}" ${choiceBlocked(run,c)?'disabled':''}><span><strong>${c.name}</strong><small>${choiceBlocked(run,c)||c.text}</small></span>${icon('arrow')}</button>`).join('')}</div><p class="section-note">Любое решение окончательно. Никаких скрытых бросков удачи.</p></div>`;
-}
-export function resultView(session) {
-  const r=session.run; const won=r.phase==='won';
-  return `<section class="result-view"><div class="result-art">${portrait(won?7:0,won?'Сердце котельной':'Инженер-алхимик')}</div><div class="result-copy"><p class="eyebrow">${won?'ЭКСПЕДИЦИЯ ЗАВЕРШЕНА':'ЭКСПЕДИЦИЯ ОКОНЧЕНА'}</p><h1>${won?'Тишина<br>в котельной.':'Искра<br>не последняя.'}</h1><p>${won?'Сердце остановлено. Шторм рассыпается над городом, оставляя в воздухе запах озона и горячей латуни.':'Матрица погасла. Чертежи, открытия и заработанные искры вернулись в мастерскую.'}</p><div class="result-stats"><span><b>${r.stats.combats}</b> побед</span><span><b>${r.stats.swaps}</b> обменов</span><span><b>×${r.stats.maxCascade}</b> каскад</span></div><p class="banked-sparks">${icon('spark')} +${r.pendingEmbers} искр в мастерской</p>${r.stats.earned.length?`<p class="section-note">Новые достижения: ${r.stats.earned.map(id=>ACHIEVEMENTS[id].name).join(' · ')}. За каждое получена ещё 1 искра.</p>`:''}<button class="primary-button" data-action="home">Вернуться в мастерскую ${icon('arrow')}</button><button class="text-button" data-action="report">Сохранить отчёт для отзыва ↗</button></div></section>`;
+
+/** Category pages and a single definition replace the growing disclosure document. */
+export function glossaryView({group='board',page=0,term=null}={}){
+  const other=getLanguage()==='ru'?'en':'ru',items=glossaryTerms.filter(item=>item.group===group),pagination=paginate(items,page,4);
+  const item=pagination.items.find(item=>item.id===term)??pagination.items[0];
+  return `<h2>${t('glossary.title')}</h2><div class="glossary-category"><span id="glossary-category-label">${t('menu.category')}</span><div class="category-picker" id="glossary-picker" data-open="false"><button type="button" id="glossary-category" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="glossary-categories" aria-labelledby="glossary-category-label glossary-category-value"><span id="glossary-category-value">${t(`glossary.group.${group}`)}</span><span class="category-chevron" aria-hidden="true"></span></button><div class="category-options" id="glossary-categories" role="listbox" aria-labelledby="glossary-category-label" aria-hidden="true" inert>${glossaryGroups.map(item=>`<div class="category-option" id="category-${item.id}" role="option" aria-selected="${item.id===group}" data-category="${item.id}"><span>${t(`glossary.group.${item.id}`)}</span><span class="category-selected-mark" aria-hidden="true">◆</span></div>`).join('')}</div></div></div><div class="catalog glossary-catalog"><div class="catalog-sidebar"><nav class="catalog-list" aria-label="${t('menu.chooseTerm')}">${pagination.items.map(value=>selection('term',value.id,t(`term.${value.id}.name`),`<span lang="${other}">${value.name[other]}</span>`,value.id===item.id)).join('')}</nav>${pager('glossary',pagination)}</div><article class="term-definition"><h3>${t(`term.${item.id}.name`)}</h3><p class="term-translation" lang="${other}">${item.name[other]}</p><p>${t(`term.${item.id}.description`)}</p></article></div>`;
 }

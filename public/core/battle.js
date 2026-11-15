@@ -2,8 +2,9 @@ import { Random } from './random.js';
 import { createBoard, swapBoard, ageCraters, strikeBoard, applyHazard, disableCorners, cleanCell, ensurePlayable } from './board.js';
 import { actionLimit, healingBlock, inStorm, meteorDamage, stormTier } from './storm.js';
 import { ENEMIES } from './content.js';
+import { glyphWeights } from './glyphs.js';
 
-export const RULES_VERSION = '0.5.0';
+export const RULES_VERSION = '0.6.0';
 const clone = state => structuredClone(state);
 /** Capture the exact state at an effect boundary without involving presentation timing. */
 function emit(state,event) {
@@ -21,16 +22,16 @@ const targetOf = state => {
 };
 
 /** All randomness is seeded; paired encounters scale each enemy independently. */
-export function createBattle(seed = 'ISKRA-01', {stormGap = 4, enemyIds = ['furnace'], paired = false, artifacts = [], hp = 70, room = 1, ruleset = 1, encounterScale = 1} = {}) {
+export function createBattle(seed = 'ISKRA-01', {stormGap = 4, enemyIds = ['furnace'], paired = false, artifacts = [], hp = 70, room = 1, ruleset = 1, encounterScale = 1, glyphVersion = 0, loadout = 'coil'} = {}) {
   if (!enemyIds.length || enemyIds.length > 3) throw new RangeError('An encounter requires 1 to 3 enemies');
   const random = new Random(seed);
-  const board = createBoard(random);
+  const board = createBoard(random,7,7,glyphVersion===1?glyphWeights(loadout,artifacts):undefined);
   const enemies = enemyIds.map(id => {
     const data = ENEMIES[id];
     const maxHp = Math.floor(data.hp * encounterScale * (enemyIds.length === 3 ? .48 : paired ? .65 : 1));
     return {id,hp:maxHp,maxHp,chill:0,poison:0,intent:0,stage:1,attackScale:encounterScale * (enemyIds.length === 3 ? .5 : paired ? .7 : 1),resists:{...data.resists}};
   });
-  return {version:RULES_VERSION,ruleset,seed,initialGap:stormGap,room,round:1,actions:actionLimit(artifacts,ruleset),phase:'player',player:{hp,maxHp:70,stormShield:0},enemies,target:0,artifacts:[...artifacts],board,storm:{gap:stormGap,target:random.int(board.tiles.length)},rng:random.state,events:[],history:[],waves:[],presentation:[],actionFlags:{}};
+  return {version:RULES_VERSION,ruleset,glyphVersion,loadout,seed,initialGap:stormGap,room,round:1,actions:actionLimit(artifacts,ruleset),phase:'player',player:{hp,maxHp:70,stormShield:0},enemies,target:0,artifacts:[...artifacts],board,storm:{gap:stormGap,target:random.int(board.tiles.length)},rng:random.state,events:[],history:[],waves:[],presentation:[],actionFlags:{}};
 }
 /** Use the same intent for the forecast and the enemy resolver. */
 export function currentIntent(enemy) {
@@ -254,7 +255,7 @@ export function endRound(state) {
 /** Standalone encounter helper retained for deterministic combat regression tests. */
 export function nextRoom(state) {
   if (state.phase !== 'victory') return state;
-  const next = createBattle(state.rng,{stormGap:Math.min(6,state.storm.gap+3),hp:state.player.hp,room:state.room+1,artifacts:state.artifacts});
+  const next = createBattle(state.rng,{stormGap:Math.min(6,state.storm.gap+3),hp:state.player.hp,room:state.room+1,artifacts:state.artifacts,glyphVersion:state.glyphVersion,loadout:state.loadout});
   next.history = [...state.history,{type:'nextRoom'}];
   return next;
 }

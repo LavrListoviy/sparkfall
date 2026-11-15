@@ -3,6 +3,7 @@ import { RULES_VERSION } from './battle.js';
 import { ARTIFACTS, LOADOUTS, ACHIEVEMENTS, ENEMIES, EVENTS } from './content.js';
 import { actionLimit } from './storm.js';
 import { TYPES, findMatches, legalMoves } from './board.js';
+import { glyphWeights } from './glyphs.js';
 
 export const SAVE_KEY = 'sparkfall.save.v1';
 const integer = (value,max=1e9) => Number.isInteger(value) && value >= 0 && value <= max;
@@ -22,6 +23,7 @@ export function encodeSession(session) {
 }
 function validateBattle(battle) {
   check(battle && battle.version === RULES_VERSION && strings(battle.seed) && [1,2].includes(battle.ruleset));
+  check([0,1].includes(battle.glyphVersion) && known(LOADOUTS,battle.loadout));
   check(distance(battle.initialGap,battle.ruleset) && integer(battle.player?.stormShield,4));
   check(integer(battle.rng,0xffffffff) && integer(battle.round) && integer(battle.actions,actionLimit(battle.artifacts,battle.ruleset)));
   check(['player','victory','defeat'].includes(battle.phase));
@@ -32,6 +34,10 @@ function validateBattle(battle) {
   check(Number.isInteger(battle.target) && battle.target >= -1 && battle.target < battle.enemies.length);
   check(battle.phase !== 'player' || (battle.player.hp > 0 && battle.enemies.some(e=>e.hp > 0)));
   const board = battle.board;
+  if (battle.glyphVersion===1) {
+    const expected=glyphWeights(battle.loadout,battle.artifacts);
+    check(board?.glyphWeights && Object.keys(board.glyphWeights).length===TYPES.length && TYPES.every(type=>board.glyphWeights[type]===expected[type]));
+  } else check(board?.glyphWeights===undefined);
   check(board?.width === 7 && board.height === 7);
   check(list(board.tiles,t=>t === null || TYPES.includes(t),49) && board.tiles.length === 49);
   check(list(board.craters,a=>integer(a,2),49) && board.craters.length === 49);
@@ -45,12 +51,19 @@ export function parseSave(raw) {
   try {
     check(typeof raw === 'string' && raw.length < 2_000_000);
     const session = JSON.parse(raw);
-    if (session?.schema === 1 && ['0.3.0','0.4.0'].includes(session.version)) {
+    if (session?.schema === 1 && ['0.3.0','0.4.0','0.5.0'].includes(session.version)) {
       const previous=session.version;session.version=RULES_VERSION;
       if(session.run){
-        session.run.routeVersion=previous==='0.3.0'?1:(session.run.routeVersion??2);
-        session.run.rewardRarity='normal';session.run.rewardExhausted=null;
-        if(session.run.battle){session.run.battle.version=RULES_VERSION;session.run.battle.ruleset=1;session.run.battle.player.stormShield=0;}
+        session.run.glyphVersion=0;
+        if(previous!=='0.5.0'){
+          session.run.routeVersion=previous==='0.3.0'?1:(session.run.routeVersion??2);
+          session.run.rewardRarity='normal';session.run.rewardExhausted=null;
+        }
+        if(session.run.battle){
+          const battle=session.run.battle;
+          battle.version=RULES_VERSION;battle.glyphVersion=0;battle.loadout=session.run.loadout;
+          if(previous!=='0.5.0'){battle.ruleset=1;battle.player.stormShield=0;}
+        }
       }
     }
     if (session?.schema !== 1 || session.version !== RULES_VERSION) throw new Error('Сохранение другой версии. Можно выгрузить его и начать новый профиль.');
@@ -62,6 +75,7 @@ export function parseSave(raw) {
     const run = session.run;
     if (run !== null) {
       check([1,2,3].includes(run.routeVersion));
+      check([0,1].includes(run.glyphVersion));
       check(run && strings(run.seed) && known(LOADOUTS,run.loadout) && integer(run.rng,0xffffffff));
       check(['map','battle','reward','event','rest','won','lost'].includes(run.phase));
       check(integer(run.floor,8) && integer(run.hp,70) && distance(run.gap,run.routeVersion>=3?2:1) && integer(run.pendingEmbers));
@@ -86,7 +100,10 @@ export function parseSave(raw) {
       check(run.currentNode === null || nodes.some(n=>n.id===run.currentNode));
       if(['battle','event','rest'].includes(run.phase)) check(run.route[run.floor]?.some(n=>n.id===run.currentNode));
       check(run.stats && integer(run.stats.combats,8) && integer(run.stats.swaps) && integer(run.stats.maxCascade,64) && list(run.stats.earned,id=>known(ACHIEVEMENTS,id),achievementCount));
-      if (run.battle) validateBattle(run.battle);
+      if (run.battle) {
+        validateBattle(run.battle);
+        check(run.battle.glyphVersion===run.glyphVersion && run.battle.loadout===run.loadout);
+      }
       check(run.phase !== 'battle' || run.battle?.phase === 'player');
     }
     return {ok:true,session};

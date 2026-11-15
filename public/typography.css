@@ -1,0 +1,40 @@
+@font-face{
+  font-family:'Cormorant Unicase';
+  src:url('./assets/fonts/cormorant-unicase-600.ttf') format('truetype');
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+}
+:root{--font-display:'Cormorant Unicase',Georgia,'Times New Roman',serif;--font-body:'Segoe UI',Arial,sans-serif}
+body{font-family:var(--font-body)}
+h1,h2,h3,.brand,.home-copy h1,.view-heading h1,.loadout-text>strong,.reward-card h2,.event-choice strong,.result-copy h1,#modal-body h2,.section-heading h2{
+  font-family:var(--font-display);font-weight:600;letter-spacing:0;line-height:1.12;
+}
+.brand{font-size:32px;letter-spacing:1px}.brand small{font-family:var(--font-body)}
+.home-copy h1{font-size:clamp(42px,5.6vw,64px);max-width:9.5em;text-wrap:balance;color:var(--gold)}
+.view-heading h1{font-size:42px}.section-heading h2{font-size:34px}
+.loadout-text>strong,.event-choice strong{font-size:25px}.reward-card h2{font-size:30px}
+#modal-body h2{font-size:34px;padding-right:25px}.result-copy h1{font-size:52px;text-wrap:balance}
+.speed-options button{font-family:var(--font-body)}
+.home-copy>p:not(.eyebrow):not(.save-hint),.view-heading>p:not(.eyebrow),.reward-card p,.event-choice small,#modal-body p{line-height:1.65}
+.loadout-text>span{font-size:13px;line-height:1.55}
+.language-options{border:0;padding:0;margin:20px 0;display:flex;flex-wrap:wrap;gap:10px}
+.language-options legend{margin-bottom:8px;font-size:14px}.language-options button{min-width:110px;font-size:15px}
+.language-options button[aria-pressed=true]{border-color:var(--gold);background:#e7bd80;color:#282032}
+.glossary-open{margin-top:20px;width:100%;font-size:14px}
+.glossary h3{font-size:27px;margin:24px 0 12px}.glossary details{border-bottom:1px solid #77677e55}
+.glossary summary{min-height:48px;padding:12px 0;font-size:15px;cursor:pointer}
+.glossary summary small{font-size:13px;color:#c0b2ca;margin-left:12px}
+.glossary details p{padding:0 0 16px;font-size:14px}
+.result-stats>span{display:flex;flex-direction:column;gap:6px}.result-stats b{font-variant-numeric:tabular-nums}
+dialog{max-height:calc(100dvh - 32px);overflow-y:auto}.combat-toolbar{min-width:0}
+dialog .close-modal{position:sticky;top:0;float:right;z-index:2;margin:0 0 8px 8px;background:#31283b}
+.enemy-name,.hero-hud>strong{overflow-wrap:anywhere}.actor-hud{font-family:var(--font-body)}
+.combat-bottom button{min-width:0}.combat-bottom #end-turn{white-space:normal}
+.graph-node strong{overflow-wrap:anywhere}.view-heading h1,.reward-card h2,.loadout-text>strong{overflow-wrap:anywhere}
+@media(max-width:600px){
+  .brand{font-size:27px;gap:8px}.home-copy h1{font-size:44px}.view-heading h1{font-size:36px}
+  .section-heading h2{font-size:30px}.result-copy h1{font-size:44px}.edition{display:none}
+  .combat-toolbar{gap:7px}.combat-toolbar>strong{display:none}#storm-help{gap:5px}
+  .glossary summary small{display:block;margin:3px 0 0 16px}.reward-card h2{font-size:28px}
+}

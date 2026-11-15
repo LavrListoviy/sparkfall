@@ -1,3 +1,4 @@
+import { t } from '../i18n/index.js';
 import * as THREE from '../vendor/three/three.module.js';
 import { combatLayout } from './layout.js';
 import { frameDuration, advanceElapsed } from './timeline.js';
@@ -19,7 +20,7 @@ export class BattleScene {
     this.cache=new Map();this.tiles=[];this.actors=[];this.targets=[];this.effects=[];
     this.selected=null;this.active=false;this.last=0;this.elapsed=0;this.reducedMotion=false;
     this.observer=new ResizeObserver(()=>{if(this.state)this.resize();});this.observer.observe(host);
-    this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.failed=true;this.finishAnimation?.();onFailure('Графический контекст потерян. Ход сохранён; обнови страницу, чтобы восстановить сцену.');});
+    this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.failed=true;this.finishAnimation?.();onFailure('graphics.contextLost');});
     this.loop=this.loop.bind(this);this.raf=requestAnimationFrame(this.loop);
   }
   async load(){
@@ -104,7 +105,7 @@ export class BattleScene {
     if(!damaging || (event.type==='unstable'&&event.source!==undefined))return;
     const kind=event.element??event.type;
     const projectile=this.sprite(this.cached(`fx:${color}:${kind}`,()=>effectTexture(color,'',kind)),10);
-    const label=event.type==='ward'?`ЩИТ ${event.amount}`:event.type==='heal'?`+${event.amount}`:event.type==='poison'?`+${event.amount} ЯД`:`−${event.amount??0}`;
+    const label=event.type==='ward'?t('effect.shield',{amount:event.amount}):event.type==='heal'?`+${event.amount}`:event.type==='poison'?t('effect.poison',{amount:event.amount}):`−${event.amount??0}`;
     const numberTexture=effectTexture(color,label);const number=this.sprite(numberTexture,11);number.userData.ownedTexture=true;
     this.effects=[projectile,number];
     for(let i=0;i<8;i++)this.effects.push(this.sprite(this.cached(`spark:${color}`,()=>effectTexture(color,'','spark')),9));

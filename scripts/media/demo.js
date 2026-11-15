@@ -1,4 +1,5 @@
 import { BattleScene } from '../presentation/scene.js';
+import { t } from '../i18n/index.js';
 import { buildTimeline } from '../presentation/timeline.js';
 import { replayReport } from '../core/replay.js';
 import { battleAction } from '../core/run.js';
@@ -10,10 +11,10 @@ const canvas=document.querySelector('#output'),context=canvas.getContext('2d');
 const status=document.querySelector('#status'),button=document.querySelector('#record');
 const report=await (await fetch('./demo-report.json')).json(),start=55;
 let session=replayReport({...report,decisions:report.decisions.slice(0,start)}),view=session.run.battle,caption='Сборка для жизни внутри шторма',recording=false;
-const scene=new BattleScene(document.querySelector('#stage'),()=>{},message=>{status.textContent=message;});
+const scene=new BattleScene(document.querySelector('#stage'),()=>{},key=>{status.textContent=t(key);});
 scene.setState(view);await scene.load();scene.active=true;button.disabled=false;status.textContent='Готово. Около 32 секунд, обычная скорость анимаций.';
 const colors={steel:'#eee3cf',fire:'#ffb455',ice:'#86ecf2',poison:'#c1e775',heal:'#f7a6c1'};
-const names={steel:'Клинок',fire:'Огонь',ice:'Холод',poison:'Яд',heal:'Лечение'};
+const names={steel:'Клинок',fire:'Огонь',ice:'Холод',poison:'Яд',heal:'Зелье'};
 function text(value,x,y,size=14,color='#eee0cf'){context.font=`bold ${size}px Consolas,monospace`;context.fillStyle=color;context.fillText(value,x,y);}
 function panel(x,y,w,h){context.fillStyle='#191625ed';context.fillRect(x,y,w,h);context.strokeStyle='#a183a0';context.strokeRect(x+.5,y+.5,w,h);}
 function draw(){

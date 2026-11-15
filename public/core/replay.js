@@ -3,10 +3,10 @@ import { createSession, startRun, enterNode, battleAction, chooseReward, chooseE
 
 /** Replay exported decisions through the same reducers, rejecting impossible transitions. */
 export function replayReport(report) {
-  if(![RULES_VERSION,'0.3.0','0.4.0'].includes(report?.version))throw new Error(`Unsupported rules version; expected ${RULES_VERSION}`);
+  if(![RULES_VERSION,'0.3.0','0.4.0','0.5.0'].includes(report?.version))throw new Error(`Unsupported rules version; expected ${RULES_VERSION}`);
   if(report.game!=='sparkfall'||typeof report.seed!=='string'||!Array.isArray(report.initialUnlocks)||!Array.isArray(report.decisions)||report.decisions.length>10000)throw new Error('Invalid expedition report');
   const initial=createSession(); initial.profile.unlocked=[...report.initialUnlocks];
-  let session=startRun(initial,report.seed,report.loadout,{routeVersion:report.routeVersion ?? (report.version==='0.3.0'?1:report.version==='0.4.0'?2:3)});
+  let session=startRun(initial,report.seed,report.loadout,{routeVersion:report.routeVersion ?? (report.version==='0.3.0'?1:report.version==='0.4.0'?2:3),glyphVersion:report.version===RULES_VERSION?(report.glyphVersion??1):0});
   if(!session.run)throw new Error('Unavailable starting loadout');
   for(const [index,decision] of report.decisions.entries()){
     const next=decision.type==='enter'?enterNode(session,decision.id)

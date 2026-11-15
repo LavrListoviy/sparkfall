@@ -2,6 +2,18 @@ export const TYPES = ['steel', 'fire', 'ice', 'poison', 'heal'];
 const copy = board => ({ ...board, tiles: [...board.tiles], craters: [...board.craters], blocked: [...(board.blocked ?? Array(board.tiles.length).fill(false))], locks: [...(board.locks ?? Array(board.tiles.length).fill(false))], unstable: [...(board.unstable ?? Array(board.tiles.length).fill(false))] });
 const active = (board, index) => index >= 0 && index < board.tiles.length && !board.craters[index] && !board.blocked?.[index];
 
+/** Draw once among allowed types; unweighted legacy boards retain their exact RNG path. */
+function drawGlyph(board,random,options=TYPES) {
+  if (!board.glyphWeights) return options[random.int(options.length)];
+  const total=options.reduce((sum,type)=>sum+board.glyphWeights[type],0);
+  let roll=random.next()*total;
+  for (const type of options) {
+    roll-=board.glyphWeights[type];
+    if (roll<0) return type;
+  }
+  return options.at(-1);
+}
+
 /** Place cell-bound elite hazards, respecting the per-kind limit. */
 export function applyHazard(board, kind, indices) {
   const result = copy(board);
@@ -96,8 +108,8 @@ export function legalMoves(board) {
 }
 
 /** Construct a stable, playable board using the supplied deterministic source. */
-export function createBoard(random, width = 7, height = 7) {
-  const board = { width, height, tiles: Array(width * height).fill(null), craters: Array(width * height).fill(0) };
+export function createBoard(random, width = 7, height = 7, glyphWeights) {
+  const board = { width, height, tiles: Array(width * height).fill(null), craters: Array(width * height).fill(0), ...(glyphWeights?{glyphWeights:{...glyphWeights}}:{}) };
   return ensurePlayable(board, random);
 }
 
@@ -115,7 +127,7 @@ export function fillBoard(board, random) {
         const tile = result.tiles[row * board.width + col];
         if (tile) values.push(tile);
       }
-      for (let row = bottom; row >= top; row--) result.tiles[row * board.width + col] = values[bottom - row] ?? TYPES[random.int(TYPES.length)];
+      for (let row = bottom; row >= top; row--) result.tiles[row * board.width + col] = values[bottom - row] ?? drawGlyph(result,random);
       bottom = top - 1;
     }
   }
@@ -135,7 +147,7 @@ export function ensurePlayable(board, random) {
         const col = i % result.width;
         const row = Math.floor(i / result.width);
         const options = TYPES.filter(type => !(col >= 2 && result.tiles[i - 1] === type && result.tiles[i - 2] === type) && !(row >= 2 && result.tiles[i - result.width] === type && result.tiles[i - result.width * 2] === type));
-        result.tiles[i] = options[random.int(options.length)];
+        result.tiles[i] = drawGlyph(result,random,options);
       }
       if (ready(result)) return result;
     }
@@ -185,7 +197,7 @@ function restoreHoles(result,random) {
       result.tiles[i] = type;
       return findMatches(result).length === 0;
     });
-    result.tiles[i] = options.length ? options[random.int(options.length)] : TYPES[random.int(TYPES.length)];
+    result.tiles[i] = drawGlyph(result,random,options.length?options:TYPES);
   }
   return ensurePlayable(result, random);
 }

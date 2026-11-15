@@ -13,12 +13,13 @@ export function createSession() {
   return {schema:1,version:RULES_VERSION,profile:{currency:0,unlocked:[],achievements:[],stats:{runs:0,wins:0,bestDepth:0}},run:null};
 }
 /** Starting cannot overwrite an active expedition or use a locked loadout. */
-export function startRun(session,seed,loadout = 'coil',{routeVersion = 3} = {}) {
+export function startRun(session,seed,loadout = 'coil',{routeVersion = 3,glyphVersion = routeVersion>=3?1:0} = {}) {
+  if (![0,1].includes(glyphVersion)) return session;
   if (isActive(session) || !LOADOUTS[loadout] || !available(session.profile,'loadout',loadout)) return session;
   const next = copy(session); const random = new Random(String(seed).slice(0,80));
   const route = createRoute(random,routeVersion);
   next.profile.stats.runs++;
-  next.run = {seed:String(seed).slice(0,80),loadout,routeVersion,initialUnlocks:[...next.profile.unlocked],rng:random.state,route,floor:0,phase:'map',hp:70,gap:4,artifacts:[LOADOUTS[loadout].artifact],pendingEmbers:0,reward:[],rewardRarity:'normal',rewardExhausted:null,event:null,battle:null,currentNode:null,chosen:[],history:[],settled:false,stats:{combats:0,swaps:0,maxCascade:0,earned:[]}};
+  next.run = {seed:String(seed).slice(0,80),loadout,routeVersion,glyphVersion,initialUnlocks:[...next.profile.unlocked],rng:random.state,route,floor:0,phase:'map',hp:70,gap:4,artifacts:[LOADOUTS[loadout].artifact],pendingEmbers:0,reward:[],rewardRarity:'normal',rewardExhausted:null,event:null,battle:null,currentNode:null,chosen:[],history:[],settled:false,stats:{combats:0,swaps:0,maxCascade:0,earned:[]}};
   return next;
 }
 /** Enter exactly one offered node; travel grants distance only after the first floor. */
@@ -32,7 +33,7 @@ export function enterNode(session,id) {
   r.currentNode = node.id; r.chosen.push(node.id); r.history.push({type:'enter',id});
   if (node.enemyIds) {
     r.phase = 'battle';
-    r.battle = createBattle(`${r.seed}:${node.id}`,{enemyIds:node.enemyIds,paired:node.enemyIds.length > 1,stormGap:r.gap,hp:r.hp,artifacts:r.artifacts,room:r.floor+1,ruleset:r.routeVersion>=3?2:1,encounterScale:node.encounterScale??1});
+    r.battle = createBattle(`${r.seed}:${node.id}`,{enemyIds:node.enemyIds,paired:node.enemyIds.length > 1,stormGap:r.gap,hp:r.hp,artifacts:r.artifacts,room:r.floor+1,ruleset:r.routeVersion>=3?2:1,encounterScale:node.encounterScale??1,glyphVersion:r.glyphVersion,loadout:r.loadout});
   } else { r.phase = node.kind; r.event = inStorm(r.gap)&&node.stormEvent?node.stormEvent:node.event; }
   return next;
 }
@@ -52,6 +53,7 @@ function reward(run,profile,rarity='normal') {
   const random = new Random(run.rng);
   const pool = Object.keys(ARTIFACTS).filter(id => {
     const item=ARTIFACTS[id];
+    if (item.introduced>=4 && run.glyphVersion!==1) return false;
     return !run.artifacts.includes(id) && (run.routeVersion<3 ? !item.introduced&&available(profile,'artifact',id) : rarity==='rare' ? item.rarity==='rare' : item.rarity!=='rare'&&available(profile,'artifact',id));
   });
   run.rewardRarity=rarity;run.rewardExhausted=null;

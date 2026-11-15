@@ -40,7 +40,7 @@ test('V05: speed adjusts time, reduced motion stays readable and hidden time doe
   assert.equal(advanceElapsed(200,16,{hidden:false}),216);
 });
 test('V05: settings validate and persist independently from run state',()=>{
-  assert.deepEqual(normalizeSettings({speed:99,reducedMotion:'yes',sound:true}),{speed:1,reducedMotion:false,sound:true});
+  assert.deepEqual(normalizeSettings({speed:99,reducedMotion:'yes',sound:true}),{speed:1,reducedMotion:false,sound:true,language:'ru'});
   let stored;const storage={setItem:(k,v)=>{stored=v;},getItem:()=>stored};
   assert.equal(persistSettings(storage,{speed:.5,reducedMotion:true,sound:false}).ok,true);
   assert.equal(loadSettings(storage).speed,.5);

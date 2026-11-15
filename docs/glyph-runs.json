@@ -1,0 +1,1904 @@
+{
+  "summary": [
+    {
+      "variant": "legacy",
+      "loadout": "coil",
+      "runs": 10,
+      "wins": 7,
+      "bossReached": 8,
+      "meanSwaps": 40.8,
+      "maxSwaps": 54,
+      "maxWaves": 7,
+      "boostOwned": 0,
+      "completeBuild": 0
+    },
+    {
+      "variant": "legacy",
+      "loadout": "thermal",
+      "runs": 10,
+      "wins": 5,
+      "bossReached": 7,
+      "meanSwaps": 38.6,
+      "maxSwaps": 49,
+      "maxWaves": 6,
+      "boostOwned": 0,
+      "completeBuild": 0
+    },
+    {
+      "variant": "legacy",
+      "loadout": "needle",
+      "runs": 10,
+      "wins": 6,
+      "bossReached": 7,
+      "meanSwaps": 39.6,
+      "maxSwaps": 51,
+      "maxWaves": 7,
+      "boostOwned": 0,
+      "completeBuild": 0
+    },
+    {
+      "variant": "current",
+      "loadout": "coil",
+      "runs": 10,
+      "wins": 8,
+      "bossReached": 8,
+      "meanSwaps": 41.8,
+      "maxSwaps": 54,
+      "maxWaves": 6,
+      "boostOwned": 5,
+      "completeBuild": 0
+    },
+    {
+      "variant": "current",
+      "loadout": "thermal",
+      "runs": 10,
+      "wins": 8,
+      "bossReached": 9,
+      "meanSwaps": 42,
+      "maxSwaps": 55,
+      "maxWaves": 9,
+      "boostOwned": 5,
+      "completeBuild": 0
+    },
+    {
+      "variant": "current",
+      "loadout": "needle",
+      "runs": 10,
+      "wins": 8,
+      "bossReached": 9,
+      "meanSwaps": 41.5,
+      "maxSwaps": 53,
+      "maxWaves": 9,
+      "boostOwned": 5,
+      "completeBuild": 0
+    },
+    {
+      "variant": "focused",
+      "loadout": "coil",
+      "runs": 10,
+      "wins": 7,
+      "bossReached": 7,
+      "meanSwaps": 42.8,
+      "maxSwaps": 57,
+      "maxWaves": 6,
+      "boostOwned": 6,
+      "completeBuild": 1
+    },
+    {
+      "variant": "focused",
+      "loadout": "thermal",
+      "runs": 10,
+      "wins": 6,
+      "bossReached": 7,
+      "meanSwaps": 36.7,
+      "maxSwaps": 48,
+      "maxWaves": 8,
+      "boostOwned": 10,
+      "completeBuild": 8
+    },
+    {
+      "variant": "focused",
+      "loadout": "needle",
+      "runs": 10,
+      "wins": 8,
+      "bossReached": 9,
+      "meanSwaps": 40.6,
+      "maxSwaps": 52,
+      "maxWaves": 8,
+      "boostOwned": 8,
+      "completeBuild": 5
+    }
+  ],
+  "rows": [
+    {
+      "variant": "legacy",
+      "seed": "PLAY-0",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 53,
+      "swaps": 32,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "thermal",
+        "green",
+        "needle",
+        "ash"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-1",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 60,
+      "swaps": 46,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "thermal",
+        "frost",
+        "green",
+        "needle",
+        "ash",
+        "overclock"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-2",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 20,
+      "bossPhase": false,
+      "artifacts": [
+        "coil",
+        "thermal",
+        "green"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-3",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 36,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "thermal",
+        "green",
+        "needle",
+        "ash"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-4",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 52,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "thermal",
+        "green",
+        "frost",
+        "needle",
+        "ash",
+        "overclock"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-5",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 28,
+      "swaps": 48,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "overclock",
+        "frost",
+        "tempestHeart",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 7
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-6",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 17,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "green",
+        "thermal",
+        "needle",
+        "frost",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-7",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 18,
+      "swaps": 54,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "thermal",
+        "frost",
+        "green",
+        "needle",
+        "ash",
+        "overclock"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-8",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 4,
+      "hp": 0,
+      "swaps": 30,
+      "bossPhase": false,
+      "artifacts": [
+        "coil",
+        "overclock",
+        "frost",
+        "stormweave"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-9",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 43,
+      "swaps": 39,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "thermal",
+        "green",
+        "needle",
+        "ash"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-0",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 53,
+      "swaps": 33,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "green",
+        "frost",
+        "needle",
+        "coil",
+        "ash"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-1",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 60,
+      "swaps": 49,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "green",
+        "frost",
+        "coil",
+        "needle",
+        "ash",
+        "overclock"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-2",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 21,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "green"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-3",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 36,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "green",
+        "frost",
+        "needle",
+        "coil",
+        "ash"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-4",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 6,
+      "hp": 0,
+      "swaps": 38,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "green",
+        "needle",
+        "coil",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-5",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 48,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "overclock",
+        "needle",
+        "tempestHeart",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-6",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 17,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "needle",
+        "coil",
+        "green",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-7",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 46,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "green",
+        "frost",
+        "needle",
+        "coil",
+        "ash",
+        "overclock"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-8",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 25,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "overclock",
+        "needle"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-9",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 43,
+      "swaps": 39,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "green",
+        "coil",
+        "frost",
+        "needle",
+        "ash"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-0",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 53,
+      "swaps": 34,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "thermal",
+        "green",
+        "coil",
+        "ash"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-1",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 46,
+      "swaps": 51,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "thermal",
+        "frost",
+        "coil",
+        "green",
+        "ash",
+        "overclock"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-2",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 20,
+      "bossPhase": false,
+      "artifacts": [
+        "needle",
+        "thermal",
+        "green"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-3",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 36,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "thermal",
+        "green",
+        "coil",
+        "ash"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-4",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 6,
+      "hp": 0,
+      "swaps": 38,
+      "bossPhase": false,
+      "artifacts": [
+        "needle",
+        "thermal",
+        "green",
+        "frost",
+        "coil",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-5",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 50,
+      "swaps": 51,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "overclock",
+        "frost",
+        "tempestHeart",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 7
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-6",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 17,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "coil",
+        "thermal",
+        "green",
+        "frost",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-7",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 46,
+      "bossPhase": false,
+      "artifacts": [
+        "needle",
+        "thermal",
+        "frost",
+        "green",
+        "coil",
+        "ash",
+        "overclock"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-8",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 4,
+      "hp": 0,
+      "swaps": 30,
+      "bossPhase": false,
+      "artifacts": [
+        "needle",
+        "overclock",
+        "frost",
+        "stormweave"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "legacy",
+      "seed": "PLAY-9",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 43,
+      "swaps": 39,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "thermal",
+        "green",
+        "coil",
+        "ash"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-0",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 47,
+      "swaps": 37,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "green",
+        "thermal",
+        "ash",
+        "frostResonator"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-1",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 49,
+      "swaps": 54,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "thermal",
+        "green",
+        "overclock",
+        "needle",
+        "steelMagnet"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-2",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 21,
+      "bossPhase": false,
+      "artifacts": [
+        "coil",
+        "ash",
+        "thermal"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-3",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 68,
+      "swaps": 41,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "ash",
+        "frost",
+        "needle",
+        "overclock",
+        "emberResonator"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-4",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 44,
+      "swaps": 54,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "ash",
+        "thermal",
+        "overclock",
+        "sporeLure",
+        "green"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-5",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 43,
+      "swaps": 48,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "green",
+        "tempestHeart",
+        "overclock",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-6",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 70,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "green",
+        "needle",
+        "frost",
+        "overclock",
+        "thermal"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-7",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 31,
+      "swaps": 52,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "frost",
+        "green",
+        "needle",
+        "ash",
+        "overclock",
+        "thermal"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-8",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 25,
+      "bossPhase": false,
+      "artifacts": [
+        "coil",
+        "overclock",
+        "thermal"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-9",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 70,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "ash",
+        "needle",
+        "frost",
+        "emberResonator",
+        "overclock"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-0",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 31,
+      "swaps": 39,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "coil",
+        "ash",
+        "needle",
+        "frostResonator"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-1",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 56,
+      "swaps": 45,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "green",
+        "coil",
+        "overclock",
+        "needle",
+        "steelMagnet"
+      ],
+      "maxWaves": 8
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-2",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 23,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "green"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-3",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 55,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "needle",
+        "green",
+        "overclock",
+        "emberResonator"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-4",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 5,
+      "swaps": 55,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "needle",
+        "frost",
+        "ash",
+        "overclock",
+        "sporeLure",
+        "green"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-5",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 36,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "green",
+        "coil",
+        "tempestHeart",
+        "overclock",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 9
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-6",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 63,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "coil",
+        "green",
+        "frost",
+        "overclock",
+        "ash"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-7",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 44,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "needle",
+        "coil",
+        "green",
+        "frost",
+        "overclock",
+        "ash"
+      ],
+      "maxWaves": 7
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-8",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 63,
+      "swaps": 45,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "overclock",
+        "green",
+        "stormweave",
+        "tempestHeart",
+        "stormlens"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-9",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 57,
+      "swaps": 37,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "green",
+        "needle",
+        "emberResonator",
+        "overclock"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-0",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 59,
+      "swaps": 33,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "coil",
+        "thermal",
+        "ash",
+        "frostResonator"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-1",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 58,
+      "swaps": 49,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "thermal",
+        "coil",
+        "overclock",
+        "green",
+        "steelMagnet"
+      ],
+      "maxWaves": 9
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-2",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 22,
+      "bossPhase": false,
+      "artifacts": [
+        "needle",
+        "ash",
+        "thermal"
+      ],
+      "maxWaves": 7
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-3",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 70,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "ash",
+        "frost",
+        "green",
+        "overclock",
+        "emberResonator"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-4",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 70,
+      "swaps": 46,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "ash",
+        "thermal",
+        "overclock",
+        "sporeLure",
+        "green"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-5",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 36,
+      "swaps": 53,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "coil",
+        "tempestHeart",
+        "overclock",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-6",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 70,
+      "swaps": 38,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "coil",
+        "green",
+        "frost",
+        "overclock",
+        "thermal"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-7",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "coil",
+        "green",
+        "ash",
+        "overclock",
+        "thermal"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-8",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 46,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "overclock",
+        "thermal",
+        "stormweave",
+        "tempestHeart",
+        "stormlens"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "current",
+      "seed": "PLAY-9",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 54,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "ash",
+        "green",
+        "frost",
+        "emberResonator",
+        "overclock"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-0",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 38,
+      "swaps": 46,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "ampoule",
+        "still",
+        "thermal",
+        "needle",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-1",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 50,
+      "swaps": 54,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "needle",
+        "green",
+        "ampoule",
+        "overclock",
+        "frost",
+        "steelMagnet"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-2",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 23,
+      "bossPhase": false,
+      "artifacts": [
+        "coil",
+        "ash",
+        "green"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-3",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 59,
+      "swaps": 41,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "still",
+        "frost",
+        "thermal",
+        "ash",
+        "green"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-4",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 6,
+      "hp": 0,
+      "swaps": 43,
+      "bossPhase": false,
+      "artifacts": [
+        "coil",
+        "needle",
+        "still",
+        "ash",
+        "overclock",
+        "thermal"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-5",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 46,
+      "swaps": 47,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "green",
+        "ampoule",
+        "tempestHeart",
+        "overclock",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-6",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 60,
+      "swaps": 45,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "ampoule",
+        "green",
+        "frost",
+        "overclock",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-7",
+      "loadout": "coil",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 7,
+      "swaps": 57,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "needle",
+        "ampoule",
+        "still",
+        "green",
+        "overclock",
+        "frost"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-8",
+      "loadout": "coil",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 4,
+      "hp": 0,
+      "swaps": 32,
+      "bossPhase": false,
+      "artifacts": [
+        "coil",
+        "overclock",
+        "needle",
+        "stormweave"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-9",
+      "loadout": "coil",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 70,
+      "swaps": 40,
+      "bossPhase": true,
+      "artifacts": [
+        "coil",
+        "thermal",
+        "green",
+        "frost",
+        "emberResonator",
+        "still"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-0",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 38,
+      "swaps": 38,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "frostResonator",
+        "emberResonator",
+        "coil",
+        "needle"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-1",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 45,
+      "swaps": 48,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "needle",
+        "overclock",
+        "emberResonator",
+        "coil",
+        "steelMagnet"
+      ],
+      "maxWaves": 8
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-2",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 2,
+      "hp": 0,
+      "swaps": 23,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "emberResonator"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-3",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 49,
+      "swaps": 39,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "needle",
+        "frostResonator",
+        "green",
+        "ash",
+        "emberResonator"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-4",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 8,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "emberResonator",
+        "frostResonator",
+        "needle",
+        "ash",
+        "frost",
+        "coil"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-5",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 6,
+      "hp": 0,
+      "swaps": 32,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "frostResonator",
+        "emberResonator",
+        "overclock",
+        "tempestHeart"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-6",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 38,
+      "swaps": 39,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frostResonator",
+        "still",
+        "coil",
+        "emberResonator",
+        "ampoule"
+      ],
+      "maxWaves": 7
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-7",
+      "loadout": "thermal",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 5,
+      "hp": 0,
+      "swaps": 31,
+      "bossPhase": false,
+      "artifacts": [
+        "thermal",
+        "emberResonator",
+        "frostResonator",
+        "frost",
+        "green"
+      ],
+      "maxWaves": 7
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-8",
+      "loadout": "thermal",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 62,
+      "swaps": 35,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frostResonator",
+        "emberResonator",
+        "stormweave",
+        "overclock",
+        "tempestHeart",
+        "stormlens"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-9",
+      "loadout": "thermal",
+      "branch": 0,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 38,
+      "bossPhase": true,
+      "artifacts": [
+        "thermal",
+        "frost",
+        "frostResonator",
+        "green",
+        "emberResonator",
+        "ash"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-0",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 60,
+      "swaps": 30,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "frost",
+        "ampoule",
+        "thermal",
+        "steelMagnet",
+        "sporeLure"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-1",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 70,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "steelMagnet",
+        "frost",
+        "overclock",
+        "sporeLure",
+        "thermal",
+        "ash"
+      ],
+      "maxWaves": 8
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-2",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "lost",
+      "floor": 4,
+      "hp": 0,
+      "swaps": 26,
+      "bossPhase": false,
+      "artifacts": [
+        "needle",
+        "steelMagnet",
+        "frost",
+        "tempestHeart",
+        "overclock"
+      ],
+      "maxWaves": 7
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-3",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 36,
+      "swaps": 39,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "steelMagnet",
+        "sporeLure",
+        "green",
+        "thermal",
+        "coil"
+      ],
+      "maxWaves": 6
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-4",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "won",
+      "floor": 8,
+      "hp": 53,
+      "swaps": 46,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "green",
+        "ash",
+        "sporeLure",
+        "overclock",
+        "steelMagnet",
+        "frost"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-5",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 20,
+      "swaps": 52,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "green",
+        "thermal",
+        "tempestHeart",
+        "overclock",
+        "stormlens",
+        "stormweave"
+      ],
+      "maxWaves": 4
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-6",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 69,
+      "swaps": 44,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "overclock",
+        "sporeLure",
+        "steelMagnet",
+        "thermal",
+        "coil"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-7",
+      "loadout": "needle",
+      "branch": 1,
+      "phase": "lost",
+      "floor": 7,
+      "hp": 0,
+      "swaps": 47,
+      "bossPhase": false,
+      "artifacts": [
+        "needle",
+        "green",
+        "steelMagnet",
+        "thermal",
+        "frost",
+        "overclock",
+        "coil"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-8",
+      "loadout": "needle",
+      "branch": 2,
+      "phase": "won",
+      "floor": 8,
+      "hp": 54,
+      "swaps": 43,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "overclock",
+        "green",
+        "stormweave",
+        "tempestHeart",
+        "stormlens"
+      ],
+      "maxWaves": 5
+    },
+    {
+      "variant": "focused",
+      "seed": "PLAY-9",
+      "loadout": "needle",
+      "branch": 0,
+      "phase": "won",
+      "floor": 8,
+      "hp": 60,
+      "swaps": 36,
+      "bossPhase": true,
+      "artifacts": [
+        "needle",
+        "thermal",
+        "coil",
+        "frost",
+        "sporeLure",
+        "overclock"
+      ],
+      "maxWaves": 6
+    }
+  ]
+}

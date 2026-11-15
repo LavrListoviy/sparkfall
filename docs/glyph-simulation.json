@@ -1,0 +1,3355 @@
+{
+  "seeds": 20,
+  "actionsPerSeed": 30,
+  "profiles": 129,
+  "totalActions": 82800,
+  "rows": [
+    {
+      "name": "uniform",
+      "actions": 6000,
+      "meanWaves": 1.5903333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.4205,
+      "minMoves": 1,
+      "newGlyphs": 32794,
+      "frequencies": {
+        "steel": 0.20000609867658717,
+        "fire": 0.2001280722083308,
+        "ice": 0.19863389644447155,
+        "poison": 0.20134780752576692,
+        "heal": 0.19988412514484358
+      }
+    },
+    {
+      "name": "coil:0",
+      "actions": 600,
+      "meanWaves": 1.6316666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.213333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3409,
+      "frequencies": {
+        "steel": 0.196538574361983,
+        "fire": 0.1997653270753887,
+        "ice": 0.19800528014080376,
+        "poison": 0.20299207978879436,
+        "heal": 0.2026987386330302
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:1",
+      "actions": 600,
+      "meanWaves": 1.585,
+      "p95": 3,
+      "p99": 5,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.381666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3280,
+      "frequencies": {
+        "steel": 0.26189024390243903,
+        "fire": 0.18902439024390244,
+        "ice": 0.18536585365853658,
+        "poison": 0.18109756097560975,
+        "heal": 0.1826219512195122
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:2",
+      "actions": 600,
+      "meanWaves": 1.6416666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.383333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3400,
+      "frequencies": {
+        "steel": 0.17705882352941177,
+        "fire": 0.275,
+        "ice": 0.18205882352941177,
+        "poison": 0.1811764705882353,
+        "heal": 0.18470588235294116
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:3",
+      "actions": 600,
+      "meanWaves": 1.595,
+      "p95": 3,
+      "p99": 4,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.476666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3325,
+      "frequencies": {
+        "steel": 0.24571428571428572,
+        "fire": 0.24481203007518798,
+        "ice": 0.1726315789473684,
+        "poison": 0.17413533834586467,
+        "heal": 0.16270676691729324
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:4",
+      "actions": 600,
+      "meanWaves": 1.6266666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.315,
+      "minMoves": 1,
+      "newGlyphs": 3399,
+      "frequencies": {
+        "steel": 0.1829949985289791,
+        "fire": 0.1650485436893204,
+        "ice": 0.2833186231244484,
+        "poison": 0.1841718152397764,
+        "heal": 0.18446601941747573
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 150,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:5",
+      "actions": 600,
+      "meanWaves": 1.59,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.515,
+      "minMoves": 1,
+      "newGlyphs": 3330,
+      "frequencies": {
+        "steel": 0.24624624624624625,
+        "fire": 0.16246246246246246,
+        "ice": 0.25405405405405407,
+        "poison": 0.17087087087087088,
+        "heal": 0.16636636636636637
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 150,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:6",
+      "actions": 600,
+      "meanWaves": 1.5783333333333334,
+      "p95": 3,
+      "p99": 5,
+      "max": 11,
+      "caps": 0,
+      "meanMoves": 9.143333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3222,
+      "frequencies": {
+        "steel": 0.16759776536312848,
+        "fire": 0.24022346368715083,
+        "ice": 0.2526381129733085,
+        "poison": 0.17380509000620734,
+        "heal": 0.16573556797020483
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 150,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:7",
+      "actions": 600,
+      "meanWaves": 1.635,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.491666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3415,
+      "frequencies": {
+        "steel": 0.22693997071742314,
+        "fire": 0.23045387994143485,
+        "ice": 0.23367496339677893,
+        "poison": 0.1581259150805271,
+        "heal": 0.15080527086383602
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 150,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:8",
+      "actions": 600,
+      "meanWaves": 1.57,
+      "p95": 3,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.358333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3253,
+      "frequencies": {
+        "steel": 0.1798339993851829,
+        "fire": 0.16999692591454044,
+        "ice": 0.18536735321241932,
+        "poison": 0.285275130648632,
+        "heal": 0.17952659083922534
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:9",
+      "actions": 600,
+      "meanWaves": 1.635,
+      "p95": 3,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.278333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3381,
+      "frequencies": {
+        "steel": 0.24489795918367346,
+        "fire": 0.1647441585329784,
+        "ice": 0.16178645371191955,
+        "poison": 0.259094942324756,
+        "heal": 0.16947648624667258
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 100,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:10",
+      "actions": 600,
+      "meanWaves": 1.535,
+      "p95": 3,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 10.075,
+      "minMoves": 1,
+      "newGlyphs": 3105,
+      "frequencies": {
+        "steel": 0.16521739130434782,
+        "fire": 0.2392914653784219,
+        "ice": 0.16843800322061192,
+        "poison": 0.2669887278582931,
+        "heal": 0.1600644122383253
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 100,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:11",
+      "actions": 600,
+      "meanWaves": 1.5566666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.386666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3237,
+      "frequencies": {
+        "steel": 0.22953351869014518,
+        "fire": 0.22582638245288847,
+        "ice": 0.15477293790546803,
+        "poison": 0.23941921532282978,
+        "heal": 0.15044794562866853
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 100,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:12",
+      "actions": 600,
+      "meanWaves": 1.6183333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.958333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3370,
+      "frequencies": {
+        "steel": 0.16439169139465876,
+        "fire": 0.1566765578635015,
+        "ice": 0.2534124629080119,
+        "poison": 0.26142433234421364,
+        "heal": 0.16409495548961425
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 150,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:13",
+      "actions": 600,
+      "meanWaves": 1.61,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.538333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3332,
+      "frequencies": {
+        "steel": 0.23259303721488594,
+        "fire": 0.15516206482593037,
+        "ice": 0.23289315726290516,
+        "poison": 0.23199279711884754,
+        "heal": 0.14735894357743098
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 150,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:14",
+      "actions": 600,
+      "meanWaves": 1.615,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.121666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3381,
+      "frequencies": {
+        "steel": 0.15350488021295475,
+        "fire": 0.22656018929310856,
+        "ice": 0.23425022182786157,
+        "poison": 0.23454599230996748,
+        "heal": 0.15113871635610765
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 150,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:15",
+      "actions": 600,
+      "meanWaves": 1.5483333333333333,
+      "p95": 3,
+      "p99": 4,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 8.996666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3193,
+      "frequencies": {
+        "steel": 0.21171312245537113,
+        "fire": 0.2079549013466959,
+        "ice": 0.2229877857813968,
+        "poison": 0.21453178828687755,
+        "heal": 0.14281240212965862
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 150,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "coil:16",
+      "actions": 600,
+      "meanWaves": 1.655,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.996666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3419,
+      "frequencies": {
+        "steel": 0.18367943843229015,
+        "fire": 0.17110266159695817,
+        "ice": 0.1883591693477625,
+        "poison": 0.1845568879789412,
+        "heal": 0.27230184264404794
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:17",
+      "actions": 600,
+      "meanWaves": 1.5366666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.516666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3207,
+      "frequencies": {
+        "steel": 0.24446523230433426,
+        "fire": 0.1637043966323667,
+        "ice": 0.16495166822575616,
+        "poison": 0.16806984720922982,
+        "heal": 0.2588088556283131
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:18",
+      "actions": 600,
+      "meanWaves": 1.565,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.223333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3249,
+      "frequencies": {
+        "steel": 0.16712834718374883,
+        "fire": 0.24469067405355494,
+        "ice": 0.1677439212065251,
+        "poison": 0.1677439212065251,
+        "heal": 0.252693136349646
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 100,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:19",
+      "actions": 600,
+      "meanWaves": 1.6266666666666667,
+      "p95": 3,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.366666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3425,
+      "frequencies": {
+        "steel": 0.2254014598540146,
+        "fire": 0.22715328467153284,
+        "ice": 0.15445255474452554,
+        "poison": 0.15357664233576643,
+        "heal": 0.23941605839416058
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 100,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:20",
+      "actions": 600,
+      "meanWaves": 1.5916666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.651666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3330,
+      "frequencies": {
+        "steel": 0.16636636636636637,
+        "fire": 0.15375375375375375,
+        "ice": 0.25225225225225223,
+        "poison": 0.16906906906906907,
+        "heal": 0.2585585585585586
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 150,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:21",
+      "actions": 600,
+      "meanWaves": 1.5966666666666667,
+      "p95": 3,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.64,
+      "minMoves": 1,
+      "newGlyphs": 3302,
+      "frequencies": {
+        "steel": 0.2283464566929134,
+        "fire": 0.15021199273167776,
+        "ice": 0.2337976983646275,
+        "poison": 0.15687462144155057,
+        "heal": 0.23076923076923078
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 150,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:22",
+      "actions": 600,
+      "meanWaves": 1.5816666666666668,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.18,
+      "minMoves": 1,
+      "newGlyphs": 3259,
+      "frequencies": {
+        "steel": 0.15188708192697145,
+        "fire": 0.22706351641607855,
+        "ice": 0.23473458115986498,
+        "poison": 0.15342129487572875,
+        "heal": 0.23289352562135623
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 150,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:23",
+      "actions": 600,
+      "meanWaves": 1.6016666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 8.745,
+      "minMoves": 1,
+      "newGlyphs": 3285,
+      "frequencies": {
+        "steel": 0.21278538812785389,
+        "fire": 0.2076103500761035,
+        "ice": 0.2213089802130898,
+        "poison": 0.14277016742770168,
+        "heal": 0.21552511415525114
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 150,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:24",
+      "actions": 600,
+      "meanWaves": 1.5983333333333334,
+      "p95": 3,
+      "p99": 5,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 10.035,
+      "minMoves": 1,
+      "newGlyphs": 3337,
+      "frequencies": {
+        "steel": 0.1654180401558286,
+        "fire": 0.15732694036559786,
+        "ice": 0.1702127659574468,
+        "poison": 0.250524423134552,
+        "heal": 0.2565178303865748
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:25",
+      "actions": 600,
+      "meanWaves": 1.6133333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.47,
+      "minMoves": 1,
+      "newGlyphs": 3340,
+      "frequencies": {
+        "steel": 0.23053892215568864,
+        "fire": 0.15119760479041916,
+        "ice": 0.1502994011976048,
+        "poison": 0.23652694610778444,
+        "heal": 0.231437125748503
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 100,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:26",
+      "actions": 600,
+      "meanWaves": 1.5416666666666667,
+      "p95": 3,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 10.013333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3138,
+      "frequencies": {
+        "steel": 0.15264499681325686,
+        "fire": 0.2253027405991077,
+        "ice": 0.14882090503505419,
+        "poison": 0.24251115360101977,
+        "heal": 0.2307202039515615
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 100,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:27",
+      "actions": 600,
+      "meanWaves": 1.6,
+      "p95": 3,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.051666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3298,
+      "frequencies": {
+        "steel": 0.20982413583990298,
+        "fire": 0.20861127956337175,
+        "ice": 0.14251061249241964,
+        "poison": 0.22043662825955124,
+        "heal": 0.2186173438447544
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 100,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:28",
+      "actions": 600,
+      "meanWaves": 1.6266666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.31,
+      "minMoves": 1,
+      "newGlyphs": 3413,
+      "frequencies": {
+        "steel": 0.15411661295048346,
+        "fire": 0.14181072370348666,
+        "ice": 0.23000292997363023,
+        "poison": 0.2387928508643422,
+        "heal": 0.23527688250805742
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 150,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:29",
+      "actions": 600,
+      "meanWaves": 1.6316666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.631666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3415,
+      "frequencies": {
+        "steel": 0.21259150805270863,
+        "fire": 0.13352855051244508,
+        "ice": 0.220497803806735,
+        "poison": 0.21669106881405564,
+        "heal": 0.21669106881405564
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 100,
+        "ice": 150,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:30",
+      "actions": 600,
+      "meanWaves": 1.5866666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 5,
+      "caps": 0,
+      "meanMoves": 9.42,
+      "minMoves": 1,
+      "newGlyphs": 3305,
+      "frequencies": {
+        "steel": 0.14190620272314675,
+        "fire": 0.2027231467473525,
+        "ice": 0.21482602118003025,
+        "poison": 0.22420574886535552,
+        "heal": 0.21633888048411498
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 150,
+        "ice": 150,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "coil:31",
+      "actions": 600,
+      "meanWaves": 1.6316666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.213333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3409,
+      "frequencies": {
+        "steel": 0.196538574361983,
+        "fire": 0.1997653270753887,
+        "ice": 0.19800528014080376,
+        "poison": 0.20299207978879436,
+        "heal": 0.2026987386330302
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 150,
+        "ice": 150,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:0",
+      "actions": 600,
+      "meanWaves": 1.56,
+      "p95": 3,
+      "p99": 4,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.125,
+      "minMoves": 1,
+      "newGlyphs": 3225,
+      "frequencies": {
+        "steel": 0.1786046511627907,
+        "fire": 0.21767441860465117,
+        "ice": 0.23627906976744187,
+        "poison": 0.1813953488372093,
+        "heal": 0.18604651162790697
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 125,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:1",
+      "actions": 600,
+      "meanWaves": 1.61,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.616666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3315,
+      "frequencies": {
+        "steel": 0.24766214177978885,
+        "fire": 0.20693815987933634,
+        "ice": 0.20874811463046758,
+        "poison": 0.1731523378582202,
+        "heal": 0.16349924585218703
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 125,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:2",
+      "actions": 600,
+      "meanWaves": 1.6083333333333334,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.79,
+      "minMoves": 1,
+      "newGlyphs": 3327,
+      "frequencies": {
+        "steel": 0.16471295461376614,
+        "fire": 0.2897505259993989,
+        "ice": 0.21039975954313195,
+        "poison": 0.1689209498046288,
+        "heal": 0.16621581003907424
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 125,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:3",
+      "actions": 600,
+      "meanWaves": 1.6783333333333332,
+      "p95": 4,
+      "p99": 6,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.568333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3499,
+      "frequencies": {
+        "steel": 0.22720777364961417,
+        "fire": 0.26407545012860817,
+        "ice": 0.1977707916547585,
+        "poison": 0.16004572735067163,
+        "heal": 0.15090025721634753
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 125,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:4",
+      "actions": 600,
+      "meanWaves": 1.6166666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.571666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3405,
+      "frequencies": {
+        "steel": 0.16387665198237886,
+        "fire": 0.20704845814977973,
+        "ice": 0.29691629955947135,
+        "poison": 0.17004405286343613,
+        "heal": 0.16211453744493393
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 175,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:5",
+      "actions": 600,
+      "meanWaves": 1.655,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.405,
+      "minMoves": 1,
+      "newGlyphs": 3551,
+      "frequencies": {
+        "steel": 0.2289495916643199,
+        "fire": 0.19008729935229512,
+        "ice": 0.271472824556463,
+        "poison": 0.1568572233173754,
+        "heal": 0.1526330611095466
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 175,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:6",
+      "actions": 600,
+      "meanWaves": 1.6016666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 10.108333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3411,
+      "frequencies": {
+        "steel": 0.1545001465845793,
+        "fire": 0.2644385810612723,
+        "ice": 0.2694224567575491,
+        "poison": 0.15889768396364704,
+        "heal": 0.15274113163295222
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 175,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:7",
+      "actions": 600,
+      "meanWaves": 1.69,
+      "p95": 4,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 10.03,
+      "minMoves": 1,
+      "newGlyphs": 3569,
+      "frequencies": {
+        "steel": 0.21126365928831606,
+        "fire": 0.24600728495376856,
+        "ice": 0.24880919024936957,
+        "poison": 0.14850098066685347,
+        "heal": 0.14541888484169235
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 175,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:8",
+      "actions": 600,
+      "meanWaves": 1.5516666666666667,
+      "p95": 3,
+      "p99": 5,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.351666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3229,
+      "frequencies": {
+        "steel": 0.16537627748528957,
+        "fire": 0.19913285847011458,
+        "ice": 0.20935274078662125,
+        "poison": 0.26169092598327653,
+        "heal": 0.16444719727469806
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 125,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:9",
+      "actions": 600,
+      "meanWaves": 1.59,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.658333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3335,
+      "frequencies": {
+        "steel": 0.22788605697151423,
+        "fire": 0.1871064467766117,
+        "ice": 0.19430284857571214,
+        "poison": 0.23658170914542728,
+        "heal": 0.15412293853073464
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 125,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:10",
+      "actions": 600,
+      "meanWaves": 1.63,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.803333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3450,
+      "frequencies": {
+        "steel": 0.15420289855072464,
+        "fire": 0.26231884057971017,
+        "ice": 0.196231884057971,
+        "poison": 0.2353623188405797,
+        "heal": 0.15188405797101448
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 125,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:11",
+      "actions": 600,
+      "meanWaves": 1.6416666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.305,
+      "minMoves": 1,
+      "newGlyphs": 3458,
+      "frequencies": {
+        "steel": 0.21139386928860612,
+        "fire": 0.25043377674956624,
+        "ice": 0.178716020821284,
+        "poison": 0.21602082128397918,
+        "heal": 0.1434355118565645
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 125,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:12",
+      "actions": 600,
+      "meanWaves": 1.5783333333333334,
+      "p95": 3,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.416666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3333,
+      "frequencies": {
+        "steel": 0.15151515151515152,
+        "fire": 0.18121812181218122,
+        "ice": 0.2745274527452745,
+        "poison": 0.24032403240324032,
+        "heal": 0.15241524152415242
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 175,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:13",
+      "actions": 600,
+      "meanWaves": 1.5816666666666668,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.688333333333333,
+      "minMoves": 2,
+      "newGlyphs": 3209,
+      "frequencies": {
+        "steel": 0.2128388906201309,
+        "fire": 0.17263945154253663,
+        "ice": 0.25771268307884077,
+        "poison": 0.21439700841383608,
+        "heal": 0.14241196634465567
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 175,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:14",
+      "actions": 600,
+      "meanWaves": 1.62,
+      "p95": 3,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.448333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3408,
+      "frequencies": {
+        "steel": 0.1426056338028169,
+        "fire": 0.2397300469483568,
+        "ice": 0.255575117370892,
+        "poison": 0.2177230046948357,
+        "heal": 0.1443661971830986
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 175,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:15",
+      "actions": 600,
+      "meanWaves": 1.6066666666666667,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.128333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3379,
+      "frequencies": {
+        "steel": 0.1944362237348328,
+        "fire": 0.23527670908552825,
+        "ice": 0.2346848179934892,
+        "poison": 0.19887540692512579,
+        "heal": 0.13672684226102397
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 175,
+        "poison": 150,
+        "heal": 100
+      }
+    },
+    {
+      "name": "thermal:16",
+      "actions": 600,
+      "meanWaves": 1.6066666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.686666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3314,
+      "frequencies": {
+        "steel": 0.16747133373566686,
+        "fire": 0.20337960168980085,
+        "ice": 0.2112251056125528,
+        "poison": 0.1659625829812915,
+        "heal": 0.25196137598068796
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 125,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:17",
+      "actions": 600,
+      "meanWaves": 1.6,
+      "p95": 3,
+      "p99": 4,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.871666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3299,
+      "frequencies": {
+        "steel": 0.22885722946347378,
+        "fire": 0.18490451652015763,
+        "ice": 0.19702940284934828,
+        "poison": 0.1542891785389512,
+        "heal": 0.23491967262806912
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 125,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:18",
+      "actions": 600,
+      "meanWaves": 1.635,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.061666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3380,
+      "frequencies": {
+        "steel": 0.15562130177514794,
+        "fire": 0.2606508875739645,
+        "ice": 0.19349112426035503,
+        "poison": 0.15266272189349112,
+        "heal": 0.2375739644970414
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 125,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:19",
+      "actions": 600,
+      "meanWaves": 1.6616666666666666,
+      "p95": 3,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.351666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3444,
+      "frequencies": {
+        "steel": 0.21225319396051104,
+        "fire": 0.2511614401858304,
+        "ice": 0.1840882694541231,
+        "poison": 0.14082462253193961,
+        "heal": 0.21167247386759583
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 125,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:20",
+      "actions": 600,
+      "meanWaves": 1.6366666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.09,
+      "minMoves": 1,
+      "newGlyphs": 3437,
+      "frequencies": {
+        "steel": 0.1510037823683445,
+        "fire": 0.18068082630200757,
+        "ice": 0.27873145184754144,
+        "poison": 0.15362234506837358,
+        "heal": 0.2359615944137329
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 175,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:21",
+      "actions": 600,
+      "meanWaves": 1.605,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.228333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3350,
+      "frequencies": {
+        "steel": 0.21014925373134327,
+        "fire": 0.17791044776119402,
+        "ice": 0.2582089552238806,
+        "poison": 0.1382089552238806,
+        "heal": 0.2155223880597015
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 175,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:22",
+      "actions": 600,
+      "meanWaves": 1.62,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.186666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3348,
+      "frequencies": {
+        "steel": 0.1454599761051374,
+        "fire": 0.23835125448028674,
+        "ice": 0.2586618876941458,
+        "poison": 0.14127837514934288,
+        "heal": 0.2162485065710872
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 175,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:23",
+      "actions": 600,
+      "meanWaves": 1.6083333333333334,
+      "p95": 4,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.328333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3361,
+      "frequencies": {
+        "steel": 0.1957750669443618,
+        "fire": 0.23415650104135674,
+        "ice": 0.23326390955072895,
+        "poison": 0.1329961321035406,
+        "heal": 0.2038083903600119
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 175,
+        "poison": 100,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:24",
+      "actions": 600,
+      "meanWaves": 1.5966666666666667,
+      "p95": 3,
+      "p99": 4,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.416666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3255,
+      "frequencies": {
+        "steel": 0.15391705069124423,
+        "fire": 0.18125960061443933,
+        "ice": 0.18986175115207374,
+        "poison": 0.2402457757296467,
+        "heal": 0.234715821812596
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 125,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:25",
+      "actions": 600,
+      "meanWaves": 1.615,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.051666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3382,
+      "frequencies": {
+        "steel": 0.2114133648728563,
+        "fire": 0.17474866942637493,
+        "ice": 0.17415730337078653,
+        "poison": 0.2238320520402129,
+        "heal": 0.21584861028976937
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 125,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:26",
+      "actions": 600,
+      "meanWaves": 1.6266666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.131666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3412,
+      "frequencies": {
+        "steel": 0.14361078546307152,
+        "fire": 0.24237983587338804,
+        "ice": 0.179073856975381,
+        "poison": 0.22010550996483,
+        "heal": 0.21483001172332944
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 125,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:27",
+      "actions": 600,
+      "meanWaves": 1.6083333333333334,
+      "p95": 4,
+      "p99": 6,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.756666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3411,
+      "frequencies": {
+        "steel": 0.1943711521547933,
+        "fire": 0.2354148343594254,
+        "ice": 0.1644678979771328,
+        "poison": 0.20052770448548812,
+        "heal": 0.20521841102316035
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 125,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:28",
+      "actions": 600,
+      "meanWaves": 1.5766666666666667,
+      "p95": 3,
+      "p99": 4,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.893333333333333,
+      "minMoves": 2,
+      "newGlyphs": 3310,
+      "frequencies": {
+        "steel": 0.14380664652567976,
+        "fire": 0.1664652567975831,
+        "ice": 0.25317220543806646,
+        "poison": 0.22054380664652568,
+        "heal": 0.21601208459214502
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 125,
+        "ice": 175,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:29",
+      "actions": 600,
+      "meanWaves": 1.6033333333333333,
+      "p95": 3,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.456666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3338,
+      "frequencies": {
+        "steel": 0.19412822049131218,
+        "fire": 0.16177351707609347,
+        "ice": 0.23487118034751348,
+        "poison": 0.2061114439784302,
+        "heal": 0.20311563810665068
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 125,
+        "ice": 175,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:30",
+      "actions": 600,
+      "meanWaves": 1.6283333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.186666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3384,
+      "frequencies": {
+        "steel": 0.13120567375886524,
+        "fire": 0.22724586288416077,
+        "ice": 0.23256501182033096,
+        "poison": 0.20567375886524822,
+        "heal": 0.2033096926713948
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 175,
+        "ice": 175,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "thermal:31",
+      "actions": 600,
+      "meanWaves": 1.59,
+      "p95": 3,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.211666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3396,
+      "frequencies": {
+        "steel": 0.18492343934040048,
+        "fire": 0.21054181389870436,
+        "ice": 0.22143698468786807,
+        "poison": 0.19257950530035337,
+        "heal": 0.19051825677267373
+      },
+      "weights": {
+        "steel": 150,
+        "fire": 175,
+        "ice": 175,
+        "poison": 150,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:0",
+      "actions": 600,
+      "meanWaves": 1.5716666666666668,
+      "p95": 3,
+      "p99": 4,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.596666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3275,
+      "frequencies": {
+        "steel": 0.22259541984732825,
+        "fire": 0.17618320610687022,
+        "ice": 0.18259541984732824,
+        "poison": 0.23572519083969465,
+        "heal": 0.18290076335877864
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 100,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:1",
+      "actions": 600,
+      "meanWaves": 1.625,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.706666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3419,
+      "frequencies": {
+        "steel": 0.2845861362971629,
+        "fire": 0.17344252705469435,
+        "ice": 0.16730038022813687,
+        "poison": 0.2102954080140392,
+        "heal": 0.16437554840596666
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 100,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:2",
+      "actions": 600,
+      "meanWaves": 1.5933333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 10.235,
+      "minMoves": 1,
+      "newGlyphs": 3333,
+      "frequencies": {
+        "steel": 0.20312031203120312,
+        "fire": 0.24992499249924993,
+        "ice": 0.1692169216921692,
+        "poison": 0.21032103210321032,
+        "heal": 0.16741674167416742
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 100,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:3",
+      "actions": 600,
+      "meanWaves": 1.5816666666666668,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.441666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3260,
+      "frequencies": {
+        "steel": 0.25920245398773006,
+        "fire": 0.2322085889570552,
+        "ice": 0.16042944785276073,
+        "poison": 0.19693251533742331,
+        "heal": 0.15122699386503066
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 100,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:4",
+      "actions": 600,
+      "meanWaves": 1.5866666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.506666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3253,
+      "frequencies": {
+        "steel": 0.2071933599754073,
+        "fire": 0.15893021826006762,
+        "ice": 0.255456501690747,
+        "poison": 0.21364893944051644,
+        "heal": 0.1647709806332616
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 150,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:5",
+      "actions": 600,
+      "meanWaves": 1.6216666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.296666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3304,
+      "frequencies": {
+        "steel": 0.2587772397094431,
+        "fire": 0.1513317191283293,
+        "ice": 0.23456416464891042,
+        "poison": 0.19975786924939468,
+        "heal": 0.15556900726392253
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 150,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:6",
+      "actions": 600,
+      "meanWaves": 1.615,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.326666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3363,
+      "frequencies": {
+        "steel": 0.19327980969372585,
+        "fire": 0.22182575081772227,
+        "ice": 0.23490930716622063,
+        "poison": 0.19714540588760035,
+        "heal": 0.1528397264347309
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 150,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:7",
+      "actions": 600,
+      "meanWaves": 1.5766666666666667,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 10.196666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3192,
+      "frequencies": {
+        "steel": 0.24655388471177944,
+        "fire": 0.21303258145363407,
+        "ice": 0.21961152882205515,
+        "poison": 0.17919799498746866,
+        "heal": 0.14160401002506265
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 150,
+        "poison": 125,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:8",
+      "actions": 600,
+      "meanWaves": 1.6483333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.66,
+      "minMoves": 1,
+      "newGlyphs": 3506,
+      "frequencies": {
+        "steel": 0.2065031374786081,
+        "fire": 0.16001140901312036,
+        "ice": 0.16514546491728466,
+        "poison": 0.30262407301768396,
+        "heal": 0.1657159155733029
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 100,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:9",
+      "actions": 600,
+      "meanWaves": 1.63,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.448333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3435,
+      "frequencies": {
+        "steel": 0.26346433770014555,
+        "fire": 0.15778748180494906,
+        "ice": 0.1487627365356623,
+        "poison": 0.2797671033478894,
+        "heal": 0.15021834061135372
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 100,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:10",
+      "actions": 600,
+      "meanWaves": 1.665,
+      "p95": 4,
+      "p99": 6,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.343333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3476,
+      "frequencies": {
+        "steel": 0.19102416570771003,
+        "fire": 0.22756041426927504,
+        "ice": 0.1518987341772152,
+        "poison": 0.2781933256616801,
+        "heal": 0.15132336018411968
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 100,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:11",
+      "actions": 600,
+      "meanWaves": 1.585,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.99,
+      "minMoves": 1,
+      "newGlyphs": 3369,
+      "frequencies": {
+        "steel": 0.2460670822202434,
+        "fire": 0.21371326803205698,
+        "ice": 0.1412882160878599,
+        "poison": 0.2549718017215791,
+        "heal": 0.1439596319382606
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 100,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:12",
+      "actions": 600,
+      "meanWaves": 1.6466666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.55,
+      "minMoves": 1,
+      "newGlyphs": 3437,
+      "frequencies": {
+        "steel": 0.1902822228687809,
+        "fire": 0.14663951120162932,
+        "ice": 0.23247017748036078,
+        "poison": 0.27989525749199884,
+        "heal": 0.15071283095723015
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 150,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:13",
+      "actions": 600,
+      "meanWaves": 1.6166666666666667,
+      "p95": 4,
+      "p99": 4,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.368333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3329,
+      "frequencies": {
+        "steel": 0.2457194352658456,
+        "fire": 0.13757885250826074,
+        "ice": 0.2192850705917693,
+        "poison": 0.2535295884650045,
+        "heal": 0.14388705316911984
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 150,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:14",
+      "actions": 600,
+      "meanWaves": 1.6633333333333333,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.356666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3537,
+      "frequencies": {
+        "steel": 0.17557251908396945,
+        "fire": 0.21006502685891998,
+        "ice": 0.21685043822448402,
+        "poison": 0.2544529262086514,
+        "heal": 0.14305908962397512
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 150,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:15",
+      "actions": 600,
+      "meanWaves": 1.6216666666666666,
+      "p95": 3,
+      "p99": 6,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.821666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3339,
+      "frequencies": {
+        "steel": 0.23060796645702306,
+        "fire": 0.1946690625935909,
+        "ice": 0.20425277029050615,
+        "poison": 0.23300389338125188,
+        "heal": 0.13746630727762804
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 150,
+        "poison": 175,
+        "heal": 100
+      }
+    },
+    {
+      "name": "needle:16",
+      "actions": 600,
+      "meanWaves": 1.6233333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.785,
+      "minMoves": 1,
+      "newGlyphs": 3354,
+      "frequencies": {
+        "steel": 0.20214669051878353,
+        "fire": 0.16070363744782348,
+        "ice": 0.167262969588551,
+        "poison": 0.2125819916517591,
+        "heal": 0.25730471079308287
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 100,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:17",
+      "actions": 600,
+      "meanWaves": 1.6233333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.811666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3311,
+      "frequencies": {
+        "steel": 0.25792811839323465,
+        "fire": 0.15131380247659318,
+        "ice": 0.15675022651766837,
+        "poison": 0.199637571730595,
+        "heal": 0.23437028088190878
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 100,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:18",
+      "actions": 600,
+      "meanWaves": 1.5866666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.585,
+      "minMoves": 1,
+      "newGlyphs": 3224,
+      "frequencies": {
+        "steel": 0.18672456575682383,
+        "fire": 0.228287841191067,
+        "ice": 0.1522952853598015,
+        "poison": 0.19975186104218362,
+        "heal": 0.23294044665012406
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 100,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:19",
+      "actions": 600,
+      "meanWaves": 1.61,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.538333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3406,
+      "frequencies": {
+        "steel": 0.24603640634174986,
+        "fire": 0.2105108631826189,
+        "ice": 0.1444509688784498,
+        "poison": 0.17762771579565473,
+        "heal": 0.22137404580152673
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 100,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:20",
+      "actions": 600,
+      "meanWaves": 1.6316666666666666,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.731666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3414,
+      "frequencies": {
+        "steel": 0.18892794376098418,
+        "fire": 0.14147627416520211,
+        "ice": 0.23345049794961922,
+        "poison": 0.19859402460456943,
+        "heal": 0.23755125951962508
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 150,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:21",
+      "actions": 600,
+      "meanWaves": 1.6366666666666667,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.406666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3433,
+      "frequencies": {
+        "steel": 0.24555782114768424,
+        "fire": 0.13690649577628897,
+        "ice": 0.21817652199242646,
+        "poison": 0.17914360617535682,
+        "heal": 0.22021555490824352
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 150,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:22",
+      "actions": 600,
+      "meanWaves": 1.6033333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 8.926666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3313,
+      "frequencies": {
+        "steel": 0.17929369151826138,
+        "fire": 0.20464835496528827,
+        "ice": 0.21309990944763055,
+        "poison": 0.1817084213703592,
+        "heal": 0.2212496226984606
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 150,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:23",
+      "actions": 600,
+      "meanWaves": 1.59,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.306666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3301,
+      "frequencies": {
+        "steel": 0.22993032414419873,
+        "fire": 0.19539533474704635,
+        "ice": 0.20478642835504393,
+        "poison": 0.1644956073916995,
+        "heal": 0.2053923053620115
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 150,
+        "poison": 125,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:24",
+      "actions": 600,
+      "meanWaves": 1.6433333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.611666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3427,
+      "frequencies": {
+        "steel": 0.18791946308724833,
+        "fire": 0.14531660344324482,
+        "ice": 0.15815582141815,
+        "poison": 0.2754595856434199,
+        "heal": 0.23314852640793698
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 100,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:25",
+      "actions": 600,
+      "meanWaves": 1.6183333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.111666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3350,
+      "frequencies": {
+        "steel": 0.24895522388059702,
+        "fire": 0.13701492537313434,
+        "ice": 0.13940298507462687,
+        "poison": 0.2582089552238806,
+        "heal": 0.21641791044776118
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 100,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:26",
+      "actions": 600,
+      "meanWaves": 1.5666666666666667,
+      "p95": 3,
+      "p99": 4,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.535,
+      "minMoves": 1,
+      "newGlyphs": 3160,
+      "frequencies": {
+        "steel": 0.17816455696202532,
+        "fire": 0.20537974683544305,
+        "ice": 0.13924050632911392,
+        "poison": 0.25854430379746834,
+        "heal": 0.21867088607594937
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 100,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:27",
+      "actions": 600,
+      "meanWaves": 1.6516666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.655,
+      "minMoves": 1,
+      "newGlyphs": 3382,
+      "frequencies": {
+        "steel": 0.23358959195742166,
+        "fire": 0.19722057953873448,
+        "ice": 0.12921348314606743,
+        "poison": 0.24039030159668834,
+        "heal": 0.1995860437610881
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 100,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:28",
+      "actions": 600,
+      "meanWaves": 1.545,
+      "p95": 3,
+      "p99": 5,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.255,
+      "minMoves": 1,
+      "newGlyphs": 3227,
+      "frequencies": {
+        "steel": 0.17942361326309267,
+        "fire": 0.13108149984505732,
+        "ice": 0.2218779051750852,
+        "poison": 0.25286643941741554,
+        "heal": 0.21475054229934923
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 100,
+        "ice": 150,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:29",
+      "actions": 600,
+      "meanWaves": 1.6383333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.655,
+      "minMoves": 2,
+      "newGlyphs": 3407,
+      "frequencies": {
+        "steel": 0.2315820369826827,
+        "fire": 0.12327560904021133,
+        "ice": 0.19870854123862636,
+        "poison": 0.24126797769298503,
+        "heal": 0.20516583504549457
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 100,
+        "ice": 150,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:30",
+      "actions": 600,
+      "meanWaves": 1.575,
+      "p95": 3,
+      "p99": 6,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.23,
+      "minMoves": 1,
+      "newGlyphs": 3297,
+      "frequencies": {
+        "steel": 0.1637852593266606,
+        "fire": 0.19229602669093115,
+        "ice": 0.20139520776463452,
+        "poison": 0.24476797088262056,
+        "heal": 0.19775553533515317
+      },
+      "weights": {
+        "steel": 125,
+        "fire": 150,
+        "ice": 150,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "needle:31",
+      "actions": 600,
+      "meanWaves": 1.55,
+      "p95": 3,
+      "p99": 6,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.086666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3193,
+      "frequencies": {
+        "steel": 0.21265267773253993,
+        "fire": 0.18321327904791732,
+        "ice": 0.1841528343250861,
+        "poison": 0.22925148762918884,
+        "heal": 0.19072972126526777
+      },
+      "weights": {
+        "steel": 175,
+        "fire": 150,
+        "ice": 150,
+        "poison": 175,
+        "heal": 150
+      }
+    },
+    {
+      "name": "limit:0",
+      "actions": 600,
+      "meanWaves": 1.6316666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.213333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3409,
+      "frequencies": {
+        "steel": 0.196538574361983,
+        "fire": 0.1997653270753887,
+        "ice": 0.19800528014080376,
+        "poison": 0.20299207978879436,
+        "heal": 0.2026987386330302
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:1",
+      "actions": 600,
+      "meanWaves": 1.66,
+      "p95": 3,
+      "p99": 6,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.57,
+      "minMoves": 1,
+      "newGlyphs": 3523,
+      "frequencies": {
+        "steel": 0.3210332103321033,
+        "fire": 0.1705932443939824,
+        "ice": 0.17030939540164633,
+        "poison": 0.17258018734033495,
+        "heal": 0.165483962531933
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:2",
+      "actions": 600,
+      "meanWaves": 1.58,
+      "p95": 3,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.973333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3292,
+      "frequencies": {
+        "steel": 0.16616038882138517,
+        "fire": 0.3238153098420413,
+        "ice": 0.1755771567436209,
+        "poison": 0.16859052247873632,
+        "heal": 0.16585662211421628
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:3",
+      "actions": 600,
+      "meanWaves": 1.6483333333333334,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 10.183333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3512,
+      "frequencies": {
+        "steel": 0.275626423690205,
+        "fire": 0.28388382687927105,
+        "ice": 0.1492027334851936,
+        "poison": 0.14493166287015946,
+        "heal": 0.14635535307517084
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 100,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:4",
+      "actions": 600,
+      "meanWaves": 1.695,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 10.215,
+      "minMoves": 1,
+      "newGlyphs": 3593,
+      "frequencies": {
+        "steel": 0.1664347342053994,
+        "fire": 0.16059003618146395,
+        "ice": 0.33871416643473423,
+        "poison": 0.17255775118285555,
+        "heal": 0.16170331199554688
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 200,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:5",
+      "actions": 600,
+      "meanWaves": 1.6533333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.878333333333334,
+      "minMoves": 2,
+      "newGlyphs": 3471,
+      "frequencies": {
+        "steel": 0.27600115240564677,
+        "fire": 0.14174589455488332,
+        "ice": 0.28550849899164504,
+        "poison": 0.1480841256122155,
+        "heal": 0.14866032843560933
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 200,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:6",
+      "actions": 600,
+      "meanWaves": 1.6633333333333333,
+      "p95": 4,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.975,
+      "minMoves": 1,
+      "newGlyphs": 3508,
+      "frequencies": {
+        "steel": 0.14481185860889395,
+        "fire": 0.27622576966932727,
+        "ice": 0.2876282782212087,
+        "poison": 0.14737742303306728,
+        "heal": 0.14395667046750285
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 200,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:7",
+      "actions": 600,
+      "meanWaves": 1.6333333333333333,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.756666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3387,
+      "frequencies": {
+        "steel": 0.2471213463241807,
+        "fire": 0.24357838795394154,
+        "ice": 0.2518452908178329,
+        "poison": 0.13167995276055505,
+        "heal": 0.12577502214348982
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 200,
+        "poison": 100,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:8",
+      "actions": 600,
+      "meanWaves": 1.6816666666666666,
+      "p95": 4,
+      "p99": 6,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.566666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3607,
+      "frequencies": {
+        "steel": 0.16301635708344886,
+        "fire": 0.160521208760743,
+        "ice": 0.17022456334904354,
+        "poison": 0.3440532298308844,
+        "heal": 0.16218464097588023
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:9",
+      "actions": 600,
+      "meanWaves": 1.635,
+      "p95": 4,
+      "p99": 6,
+      "max": 11,
+      "caps": 0,
+      "meanMoves": 9.643333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3464,
+      "frequencies": {
+        "steel": 0.279445727482679,
+        "fire": 0.14722863741339492,
+        "ice": 0.13914549653579678,
+        "poison": 0.29359122401847576,
+        "heal": 0.14058891454965358
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 100,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:10",
+      "actions": 600,
+      "meanWaves": 1.6766666666666667,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.751666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3515,
+      "frequencies": {
+        "steel": 0.14366998577524892,
+        "fire": 0.28278805120910383,
+        "ice": 0.14167852062588904,
+        "poison": 0.29075391180654336,
+        "heal": 0.1411095305832148
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 100,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:11",
+      "actions": 600,
+      "meanWaves": 1.7133333333333334,
+      "p95": 4,
+      "p99": 6,
+      "max": 10,
+      "caps": 0,
+      "meanMoves": 9.736666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3571,
+      "frequencies": {
+        "steel": 0.25119014281713803,
+        "fire": 0.24642957154858583,
+        "ice": 0.12881545785494258,
+        "poison": 0.2467096051526183,
+        "heal": 0.1268552226267152
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 100,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:12",
+      "actions": 600,
+      "meanWaves": 1.6483333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.938333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3421,
+      "frequencies": {
+        "steel": 0.14527915814089448,
+        "fire": 0.13329435837474424,
+        "ice": 0.28588132125109617,
+        "poison": 0.29260450160771706,
+        "heal": 0.14294066062554808
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 200,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:13",
+      "actions": 600,
+      "meanWaves": 1.6416666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 11,
+      "caps": 0,
+      "meanMoves": 9.555,
+      "minMoves": 1,
+      "newGlyphs": 3410,
+      "frequencies": {
+        "steel": 0.24574780058651027,
+        "fire": 0.11994134897360703,
+        "ice": 0.2533724340175953,
+        "poison": 0.2527859237536657,
+        "heal": 0.1281524926686217
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 200,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:14",
+      "actions": 600,
+      "meanWaves": 1.6366666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 6,
+      "caps": 0,
+      "meanMoves": 9.778333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3446,
+      "frequencies": {
+        "steel": 0.12217063261752757,
+        "fire": 0.24637260591990714,
+        "ice": 0.2498549042367963,
+        "poison": 0.2544979686593151,
+        "heal": 0.12710388856645385
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 200,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:15",
+      "actions": 600,
+      "meanWaves": 1.6766666666666667,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.595,
+      "minMoves": 1,
+      "newGlyphs": 3517,
+      "frequencies": {
+        "steel": 0.2209269263576912,
+        "fire": 0.22405459198180266,
+        "ice": 0.21808359397213534,
+        "poison": 0.2189365936878021,
+        "heal": 0.11799829400056866
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 200,
+        "poison": 200,
+        "heal": 100
+      }
+    },
+    {
+      "name": "limit:16",
+      "actions": 600,
+      "meanWaves": 1.645,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 10.268333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3515,
+      "frequencies": {
+        "steel": 0.16301564722617354,
+        "fire": 0.15846372688477953,
+        "ice": 0.16500711237553342,
+        "poison": 0.17297297297297298,
+        "heal": 0.34054054054054056
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:17",
+      "actions": 600,
+      "meanWaves": 1.6866666666666668,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 10.381666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3594,
+      "frequencies": {
+        "steel": 0.27740678909293265,
+        "fire": 0.1424596549805231,
+        "ice": 0.1407902058987201,
+        "poison": 0.14913745130773512,
+        "heal": 0.29020589872008906
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 100,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:18",
+      "actions": 600,
+      "meanWaves": 1.725,
+      "p95": 4,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 10.163333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3755,
+      "frequencies": {
+        "steel": 0.14247669773635152,
+        "fire": 0.28122503328894805,
+        "ice": 0.14354194407456725,
+        "poison": 0.14620505992010652,
+        "heal": 0.28655126498002664
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 100,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:19",
+      "actions": 600,
+      "meanWaves": 1.6783333333333332,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 10.196666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3558,
+      "frequencies": {
+        "steel": 0.2487352445193929,
+        "fire": 0.24058459808881394,
+        "ice": 0.13209668353007306,
+        "poison": 0.12169758291174818,
+        "heal": 0.2568858909499719
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 100,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:20",
+      "actions": 600,
+      "meanWaves": 1.655,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 10.161666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3486,
+      "frequencies": {
+        "steel": 0.14199655765920827,
+        "fire": 0.13539873780837636,
+        "ice": 0.2825588066551922,
+        "poison": 0.14457831325301204,
+        "heal": 0.29546758462421113
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 200,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:21",
+      "actions": 600,
+      "meanWaves": 1.6583333333333334,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 10.245,
+      "minMoves": 1,
+      "newGlyphs": 3494,
+      "frequencies": {
+        "steel": 0.2484258729250143,
+        "fire": 0.11820263308528907,
+        "ice": 0.25414997137950773,
+        "poison": 0.11877504293073841,
+        "heal": 0.2604464796794505
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 200,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:22",
+      "actions": 600,
+      "meanWaves": 1.6716666666666666,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.966666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3460,
+      "frequencies": {
+        "steel": 0.12658959537572254,
+        "fire": 0.23641618497109826,
+        "ice": 0.2560693641618497,
+        "poison": 0.12109826589595375,
+        "heal": 0.25982658959537575
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 200,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:23",
+      "actions": 600,
+      "meanWaves": 1.6183333333333334,
+      "p95": 4,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.683333333333334,
+      "minMoves": 1,
+      "newGlyphs": 3398,
+      "frequencies": {
+        "steel": 0.2163037080635668,
+        "fire": 0.22012948793407888,
+        "ice": 0.22307239552678046,
+        "poison": 0.11271336080047087,
+        "heal": 0.22778104767510302
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 200,
+        "poison": 100,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:24",
+      "actions": 600,
+      "meanWaves": 1.675,
+      "p95": 4,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.94,
+      "minMoves": 1,
+      "newGlyphs": 3547,
+      "frequencies": {
+        "steel": 0.14434733577671272,
+        "fire": 0.13335212855934592,
+        "ice": 0.14688469128841275,
+        "poison": 0.2864392444319143,
+        "heal": 0.2889765999436143
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 100,
+        "poison": 200,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:25",
+      "actions": 600,
+      "meanWaves": 1.6433333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.758333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3438,
+      "frequencies": {
+        "steel": 0.25043630017452007,
+        "fire": 0.12187318208260617,
+        "ice": 0.12303664921465969,
+        "poison": 0.25072716695753344,
+        "heal": 0.25392670157068065
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 100,
+        "poison": 200,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:26",
+      "actions": 600,
+      "meanWaves": 1.6816666666666666,
+      "p95": 4,
+      "p99": 6,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 10.046666666666667,
+      "minMoves": 1,
+      "newGlyphs": 3456,
+      "frequencies": {
+        "steel": 0.12239583333333333,
+        "fire": 0.24855324074074073,
+        "ice": 0.12789351851851852,
+        "poison": 0.24623842592592593,
+        "heal": 0.25491898148148145
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 100,
+        "poison": 200,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:27",
+      "actions": 600,
+      "meanWaves": 1.6133333333333333,
+      "p95": 4,
+      "p99": 5,
+      "max": 8,
+      "caps": 0,
+      "meanMoves": 9.571666666666667,
+      "minMoves": 2,
+      "newGlyphs": 3280,
+      "frequencies": {
+        "steel": 0.21951219512195122,
+        "fire": 0.2222560975609756,
+        "ice": 0.10426829268292682,
+        "poison": 0.22926829268292684,
+        "heal": 0.22469512195121952
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 100,
+        "poison": 200,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:28",
+      "actions": 600,
+      "meanWaves": 1.7233333333333334,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.525,
+      "minMoves": 1,
+      "newGlyphs": 3584,
+      "frequencies": {
+        "steel": 0.12416294642857142,
+        "fire": 0.12388392857142858,
+        "ice": 0.24469866071428573,
+        "poison": 0.24916294642857142,
+        "heal": 0.25809151785714285
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 100,
+        "ice": 200,
+        "poison": 200,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:29",
+      "actions": 600,
+      "meanWaves": 1.6066666666666667,
+      "p95": 3,
+      "p99": 5,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 9.925,
+      "minMoves": 1,
+      "newGlyphs": 3372,
+      "frequencies": {
+        "steel": 0.22212336892052195,
+        "fire": 0.1034994068801898,
+        "ice": 0.22241992882562278,
+        "poison": 0.23161328588374852,
+        "heal": 0.22034400948991698
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 100,
+        "ice": 200,
+        "poison": 200,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:30",
+      "actions": 600,
+      "meanWaves": 1.6233333333333333,
+      "p95": 4,
+      "p99": 6,
+      "max": 7,
+      "caps": 0,
+      "meanMoves": 10.156666666666666,
+      "minMoves": 1,
+      "newGlyphs": 3413,
+      "frequencies": {
+        "steel": 0.11046000585994727,
+        "fire": 0.21037210665104014,
+        "ice": 0.2235569879871081,
+        "poison": 0.22970993261060652,
+        "heal": 0.225900966891298
+      },
+      "weights": {
+        "steel": 100,
+        "fire": 200,
+        "ice": 200,
+        "poison": 200,
+        "heal": 200
+      }
+    },
+    {
+      "name": "limit:31",
+      "actions": 600,
+      "meanWaves": 1.6316666666666666,
+      "p95": 3,
+      "p99": 5,
+      "max": 9,
+      "caps": 0,
+      "meanMoves": 9.213333333333333,
+      "minMoves": 1,
+      "newGlyphs": 3409,
+      "frequencies": {
+        "steel": 0.196538574361983,
+        "fire": 0.1997653270753887,
+        "ice": 0.19800528014080376,
+        "poison": 0.20299207978879436,
+        "heal": 0.2026987386330302
+      },
+      "weights": {
+        "steel": 200,
+        "fire": 200,
+        "ice": 200,
+        "poison": 200,
+        "heal": 200
+      }
+    }
+  ]
+}

@@ -6,7 +6,9 @@ test('P01: every entry-page asset stays inside a GitHub Pages project path and e
   const base=new URL('https://example.github.io/sparkfall/');
   const sources=[
     ['index.html',/(?:src|href)="([^"]+)"/g],
+    ['menus.css',/url\(['"]?([^)'"\s]+)['"]?\)/g],
     ['pixel.css',/url\(['"]?([^)'"\s]+)['"]?\)/g],
+    ['typography.css',/url\(['"]?([^)'"\s]+)['"]?\)/g],
     ['presentation/scene.js',/['"]([^'"]+\.(?:png|svg))['"]/g],
   ];
   for(const [file,pattern] of sources){

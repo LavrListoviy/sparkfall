@@ -33,9 +33,9 @@ export function bestMove(battle) {
   return best;
 }
 /** Play a whole route through public reducers, validating every persisted snapshot. */
-export function simulate(seed,loadout='coil',branch=0,{unlocks=['loadout:thermal','loadout:needle']}={}) {
+export function simulate(seed,loadout='coil',branch=0,{unlocks=['loadout:thermal','loadout:needle'],glyphVersion=1,rewardPriority=[]}={}) {
   const profile=createSession(); profile.profile.unlocked=unlocks;
-  let session=startRun(profile,seed,loadout),steps=0,bossPhase=false;
+  let session=startRun(profile,seed,loadout,{glyphVersion}),steps=0,bossPhase=false;
   while(!session.run.settled && steps++<300) {
     const r=session.run;
     if(r.phase==='map'){
@@ -44,7 +44,8 @@ export function simulate(seed,loadout='coil',branch=0,{unlocks=['loadout:thermal
       session=enterNode(session,node.id);
     } else if(r.phase==='reward'){
       const order=branch===2?['tempestHeart','stormweave','stormlens','grounding','stormcompass','overclock','frost','thermal','green','needle','coil','ash']:['frost','thermal','green','needle','coil','ash','stormweave','grounding','stormcompass','stormlens','tempestHeart','overclock'];
-      const rank=id=>order.includes(id)?order.indexOf(id):99;
+      const priorities=[...rewardPriority,...order];
+      const rank=id=>priorities.includes(id)?priorities.indexOf(id):99;
       session=chooseReward(session,[...r.reward].sort((a,b)=>rank(a)-rank(b))[0]);
     } else if(['event','rest'].includes(r.phase)){
       const choices=EVENTS[r.event].choices.filter(c=>!choiceBlocked(r,c));
